@@ -1,0 +1,522 @@
+@import url('https://fonts.googleapis.com/css2?family=Original+Surfer&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: #f8f9fc;
+    color: #151515;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ================= LAYOUT ================= */
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+    width: 280px;
+    min-height: 100vh;
+    background:#fef9cb;
+    padding: 25px 15px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 0 28px 0;
+}
+
+
+/* ================= LOGO ================= */
+
+.logo-area { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+} 
+
+.logo-area img {
+     width: 200px; 
+     height: 200px; 
+     object-fit: contain; 
+     display: block; 
+     filter: drop-shadow(0 15px 20px rgba(44, 88, 132, 0.349));
+     transition: 0.3s ease;
+    }
+
+.logo-area img:hover {
+    transform: translateY(-8px) scale(1.03);
+}
+
+.logo-area h2 {
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.logo-area p {
+    font-size: 13px;
+    color: #555;
+}
+
+
+/* ================= MENU ================= */
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.menu-item {
+    color: #2c4c81;
+    height: 58px;
+    padding: 0 18px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-radius: 17px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.25s ease;
+}
+
+.menu-item i {
+    width: 30px;
+    text-align: center;
+    font-size: 21px;
+}
+
+.menu-item:hover {
+    background: rgba(255,255,255,0.65);
+    transform: translateX(3px);
+}
+
+.menu-item.active {
+    background: #b7ddf7;
+}
+
+.menu-item.active i {
+    color: #111;
+}
+
+
+/* ================= SIDEBAR BOTTOM ================= */
+
+.sidebar-bottom {
+    margin-top: auto;
+
+    padding-top: 20px;
+
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.logout {
+    margin-top: 10px;
+}
+
+
+/* ================= MAIN ================= */
+
+.main-content {
+    flex: 1;
+    padding: 20px 35px 40px;
+    overflow-x: auto;
+    
+}
+
+
+/* ================= TOPBAR ================= */
+
+.topbar {
+    height: 55px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #e9eef4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 21px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-info strong {
+    font-size: 15px;
+}
+
+.profile-info small {
+    color: #777;
+    font-size: 12px;
+}
+
+.top-logout {
+    margin-left: 25px;
+    font-size: 20px;
+}
+
+
+/* ================= WELCOME ================= */
+
+.welcome {
+    background: #b4dbf7;
+    border-radius: 28px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.welcome h3 {
+    font-family: "Original Surfer", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 23px;
+    margin-bottom: 7px;
+    color: #456cae;
+}
+
+/* ================= STATISTICS ================= */
+
+.statistics {
+    display: grid;
+    grid-template-columns:
+        repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 18px;
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.05);
+}
+
+.stat-icon {
+    width: 62px;
+    height: 62px;
+    border-radius: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 25px;
+}
+
+.blue {
+    background: #398ee8;
+}
+
+.green {
+    background: #37bd5a;
+}
+
+.orange {
+    background: #ffa515;
+}
+
+.purple {
+    background: #8553ed;
+}
+
+.stat-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-content span {
+    font-size: 14px;
+    color: #2c4c81;
+}
+
+.stat-content strong {
+    font-size: 28px;
+    line-height: 1.25;
+}
+
+.stat-content small {
+    font-size: 12px;
+}
+
+.up {
+    color: #28aa4c;
+}
+
+.down {
+    color: #e63c3c;
+}
+
+
+/* ================= TRANSACTION ================= */
+
+.transaction-grid {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 20px;
+}
+
+.transaction-card {
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 20px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.05);
+}
+
+
+/* ================= CARD HEADER ================= */
+
+.card-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 18px;
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+    color: #2c4c81;
+    gap: 13px;
+}
+
+.mini-icon {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 12px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 21px;
+}
+
+.blue-bg {
+    background: #e4f2ff;
+    color: #2386df;
+}
+
+.green-bg {
+    background: #e8f9ea;
+    color: #35ae4d;
+}
+
+.card-title h2 {
+    font-size: 17px;
+}
+
+.card-title p {
+    font-size: 11px;
+    color: #7a8390;
+    margin-top: 2px;
+}
+
+.view-all {
+    border: 1px solid #a8d4fa;
+    color: #2386df;
+    padding: 9px 13px;
+    border-radius: 11px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.view-all i {
+    margin-left: 5px;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1100px) {
+
+    .sidebar {
+        width: 230px;
+    }
+
+    .statistics {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .transaction-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        border-radius: 0;
+    }
+
+    .logo-area {
+        margin-bottom: 15px;
+    }
+
+    .logo-area img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .menu {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .sidebar-bottom {
+        margin-top: 15px;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .statistics {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome-image {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .menu {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome {
+        padding: 22px;
+    }
+
+    .welcome-text h1 {
+        font-size: 24px;
+    }
+
+    .quote-card {
+        padding: 20px;
+        gap: 15px;
+    }
+
+    .quote-books {
+        display: none;
+    }
+
+}
+
+
+/* ================= GRAFIK DASHBOARD (tambahan) ================= */
+
+.chart-grid {
+    margin-bottom: 20px;
+}
+
+.chart-box {
+    position: relative;
+    height: 290px;
+}
+
+.chart-empty {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #7a8390;
+    font-size: 13px;
+    background: #f6f8fa;
+    border-radius: 14px;
+}
+
+.orange-bg {
+    background: #fff3dc;
+    color: #ee9500;
+}
+
+.purple-bg {
+    background: #f0e9fe;
+    color: #7a45e0;
+}
+
+.stat-content small {
+    color: #7a8390;
+}
+
+.sidebar-bottom .menu-item.logout {
+    color: #d23a3a;
+}
+
+.sidebar-bottom .menu-item.logout:hover {
+    background: rgba(255, 255, 255, 0.85);
+}
+
+/* ================= RIWAYAT PEMINJAMAN USER ================= */
+.admin-history-card{margin-top:20px}
+.admin-history-table table{min-width:760px}
+.admin-history-table strong{display:block;font-size:12px;color:#33475b}
+.history-email{display:block;font-size:10px;color:#8a949e;margin-top:2px}
+.history-status{display:inline-block;padding:6px 10px;border-radius:20px;font-size:10px;font-weight:700;white-space:nowrap}
+.status-pengajuan{background:#fff3b5;color:#8a7000}
+.status-disetujui{background:#d8edff;color:#26739b}
+.status-dipinjam{background:#cfe8f5;color:#1f607a}
+.status-dikembalikan{background:#d9f2df;color:#27804b}
+.status-ditolak{background:#ffe0e0;color:#c1121f}
+.history-empty{text-align:center;padding:30px;color:#7a8390}

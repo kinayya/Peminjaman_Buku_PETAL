@@ -1,0 +1,901 @@
+@import url('https://fonts.googleapis.com/css2?family=Original+Surfer&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f8fbfc;
+    color: #2c4c81;
+}
+
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+    width: calc(100% - 50px);
+    margin: 20px auto;
+    padding: 8px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(
+        90deg,
+        #feffd6 5%,     /* Kream di pinggir kiri */
+        #b4dbf7 50%,    /* Biru di titik tengah */
+        #feffd6 100%    /* Kream di pinggir kanan */
+    );
+    border-radius: 50px;
+    height: 70px;
+}
+
+
+.logo {
+    width: 95px;
+    height: 95px;
+    object-fit: contain;
+    margin-top: 6px;
+}
+
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+.nav-links a {
+    text-decoration: none;
+    color: #33475B;
+
+    padding: 11px 18px;
+
+    border-radius: 999px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: 0.25s ease;
+}
+
+
+.nav-links a:hover,
+.nav-links a.active {
+
+    background: #fef9cb;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.08);
+
+    transform: translateY(-1px);
+}
+
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container {
+
+    width: calc(100% - 60px);
+    max-width: 1400px;
+
+    margin: 35px auto 50px;
+}
+
+
+
+/* =====================================================
+   PAGE HEADER
+===================================================== */
+
+.page-header {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+
+    margin-bottom: 25px;
+
+    gap: 15px;
+}
+
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.search-box {
+    width: 320px;
+    position: relative;
+}
+
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #456cae;
+}
+
+
+.search-box input {
+    width: 100%;
+    padding: 11px 16px 11px 40px;
+    border: 2px solid #6b96da;
+    border-radius: 10px;
+    outline: none;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+
+.search-box input:focus {
+    border-color: #b4dbf7;
+    box-shadow: 0 0 0 3px rgba(62, 157, 178, 0.08);
+}
+
+
+
+/* =====================================================
+   BUTTON TAMBAH
+===================================================== */
+
+.btn-tambah {
+    margin-left: auto;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    background: #b4dbf7;
+    color: #456cae;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    transition: 0.25s ease;
+}
+
+
+.btn-tambah:hover {
+    background: #6b96da;
+    color: white;
+    transform: translateY(-3px);
+}
+
+
+
+/* =====================================================
+   TABLE WRAPPER
+===================================================== */
+
+.table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 15px rgba(
+            0,
+            0,
+            0,
+            0.03
+        );
+}
+
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+#tableKategori {
+
+    width: 100%;
+
+    min-width: 600px;
+
+    border-collapse: collapse;
+
+    overflow: hidden;
+}
+
+
+
+/* =====================================================
+   TABLE HEADER
+===================================================== */
+
+#tableKategori thead {
+
+    background: #feffd6;
+}
+
+
+#tableKategori th {
+
+    padding: 14px 15px;
+
+    text-align: left;
+
+    color: #2c4c81;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    border-bottom:
+        2px solid #b4dbf7;
+}
+
+
+
+/* =====================================================
+   TABLE BODY
+===================================================== */
+
+#tableKategori td {
+
+    padding: 14px 15px;
+
+    border-bottom:
+        1px solid #eef2f3;
+
+    font-size: 14px;
+
+    vertical-align: middle;
+
+    background: white;
+}
+
+
+#tableKategori tbody tr {
+
+    transition: 0.2s ease;
+}
+
+
+#tableKategori tbody tr:hover td {
+
+    background: #f1f8f9;
+}
+
+
+#tableKategori tbody tr:last-child td {
+
+    border-bottom: none;
+}
+
+
+
+/* =====================================================
+   NAMA KATEGORI
+===================================================== */
+
+.nama-kategori {
+
+    font-weight: 600;
+
+    color: #33475B;
+}
+
+
+
+/* =====================================================
+   AKSI
+===================================================== */
+
+#tableKategori td.aksi {
+
+    white-space: nowrap;
+}
+
+
+.btn-edit,
+.btn-hapus {
+
+    width: 34px;
+    height: 34px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.2s ease;
+}
+
+
+
+/* EDIT */
+
+.btn-edit {
+    background: #fef9cb;
+    color: #456cae;
+    margin-right: 5px;
+}
+
+
+.btn-edit:hover {
+    background: #f6e97a;
+    color: white;
+    transform: translateY(-2px);
+}
+
+
+
+/* HAPUS */
+
+.btn-hapus {
+
+    background: #fff0f0;
+
+    color: #d65c5c;
+}
+
+
+.btn-hapus:hover {
+
+    background: #d65c5c;
+
+    color: white;
+
+    transform: translateY(-2px);
+}
+
+
+
+/* =====================================================
+   DATA KOSONG
+===================================================== */
+
+.empty-data {
+
+    text-align: center !important;
+
+    padding: 50px !important;
+
+    color: #8a9aa2 !important;
+}
+
+
+.empty-data i {
+
+    font-size: 35px;
+
+    margin-bottom: 12px;
+}
+
+
+
+/* =====================================================
+   PAGINATION
+===================================================== */
+
+.pagination {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 25px;
+}
+
+
+.pagination a {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 8px;
+    color: #6b96da;
+    border: 2px solid #6b96da;
+    font-size: 13px;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+
+.pagination a:hover,
+.pagination a.active {
+    background: #fef9cb;
+    color: #2c4c81;
+}
+
+
+
+/* =====================================================
+   MODAL OVERLAY
+===================================================== */
+
+.modal-overlay {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        rgba(
+            24,
+            43,
+            52,
+            0.45
+        );
+
+    backdrop-filter: blur(4px);
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    z-index: 9999;
+}
+
+
+.modal-overlay.active {
+
+    display: flex;
+}
+
+
+
+/* =====================================================
+   MODAL BOX
+===================================================== */
+
+.modal-box {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 550px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 25px 70px rgba(
+            0,
+            0,
+            0,
+            0.2
+        );
+
+    animation:
+        modalMasuk
+        0.25s ease;
+}
+
+
+
+/* =====================================================
+   ANIMATION
+===================================================== */
+
+@keyframes modalMasuk {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(-30px)
+            scale(0.96);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+
+/* =====================================================
+   CLOSE
+===================================================== */
+
+.modal-close {
+
+    position: absolute;
+
+    right: 18px;
+    top: 18px;
+
+    width: 38px;
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f0f4f5;
+
+    color: #52646c;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.modal-close:hover {
+
+    background: #fef9cb;
+
+    color: black;
+
+    transform: rotate(90deg);
+}
+
+
+
+/* =====================================================
+   MODAL TITLE
+===================================================== */
+
+.modal-title {
+    font-family: "Original Surfer", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 27px;
+    color: #6b96da;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #6b96da;
+}
+
+
+.form-group input {
+
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border:
+        1px solid #d8e3e6;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    color: #6b96da;
+
+    background: white;
+
+    transition: 0.2s;
+}
+
+
+.form-group input:focus {
+
+    border-color: #3e9db2;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(
+            62,
+            157,
+            178,
+            0.1
+        );
+}
+
+
+
+/* =====================================================
+   MODAL ACTIONS
+===================================================== */
+
+.modal-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 25px;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid #edf1f2;
+}
+
+
+.btn-batal,
+.btn-simpan {
+
+    border: none;
+
+    padding: 11px 22px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    transition: 0.2s;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.btn-batal {
+
+    background: #eef2f3;
+
+    color: #53646d;
+}
+
+
+.btn-batal:hover {
+
+    background: #fef9cb;
+    color: black;
+    transform: translateY(-1px);
+}
+
+
+.btn-simpan {
+
+    background: #feffd6;
+
+    color: black;
+}
+
+
+.btn-simpan:hover {
+
+    background: #fef9cb;
+
+    transform: translateY(-1px);
+}
+
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .navbar {
+
+        width:
+            calc(100% - 30px);
+    }
+
+
+    .container {
+
+        width:
+            calc(100% - 30px);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .navbar {
+
+        width:
+            calc(100% - 25px);
+
+        min-height: 70px;
+
+        height: auto;
+
+        border-radius: 25px;
+
+        padding: 10px 15px;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+
+    .logo {
+
+        width: 80px;
+
+        height: 80px;
+
+        margin-top: 0;
+    }
+
+
+    .nav-links {
+
+        width: 100%;
+
+        overflow-x: auto;
+
+        justify-content: flex-start;
+
+        padding-bottom: 3px;
+    }
+
+
+    .nav-links a {
+
+        flex-shrink: 0;
+    }
+
+
+    .container {
+
+        width:
+            calc(100% - 25px);
+
+        margin-top: 25px;
+    }
+
+
+    .page-header {
+
+        align-items: stretch;
+
+        gap: 12px;
+
+        flex-direction: column;
+    }
+
+
+    .search-box {
+
+        width: 100%;
+    }
+
+
+    .btn-tambah {
+
+        margin-left: 0;
+
+        width: 100%;
+
+        justify-content: center;
+    }
+
+
+    #tableKategori {
+
+        min-width: 500px;
+    }
+
+
+    .modal-box {
+
+        padding: 23px;
+
+        border-radius: 16px;
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .modal-box {
+
+        max-height: 94vh;
+
+        padding: 20px;
+    }
+
+
+    .modal-title {
+
+        font-size: 22px;
+    }
+
+
+    .modal-actions {
+
+        flex-direction: column-reverse;
+    }
+
+
+    .btn-batal,
+    .btn-simpan {
+
+        width: 100%;
+
+        justify-content: center;
+
+        text-align: center;
+    }
+
+}

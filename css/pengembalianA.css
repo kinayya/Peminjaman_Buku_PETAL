@@ -1,0 +1,52 @@
+/* =====================================================
+   TAMBAHAN KHUSUS HALAMAN PENGEMBALIAN (ADMIN)
+   Dipakai bersama css/peminjamanA.css
+===================================================== */
+
+.badge-menunggu {
+    background: #e1dad1;
+    color: #646260;
+}
+
+
+.keterangan-kecil {
+    display: block;
+    font-size: 12px;
+    color: #8a9aa2;
+    margin-top: 3px;
+}
+
+
+.btn-konfirmasi {
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12.5px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: 0.2s ease;
+    background: #dcf3e2;
+    color: #1e8a4c;
+}
+
+
+.btn-konfirmasi:hover {
+    background: #1e8a4c;
+    color: white;
+    transform: translateY(-2px);
+}
+
+
+.btn-konfirmasi.btn-menunggu {
+    background: #b4dbf7;
+    color: black;
+}
+
+
+.btn-konfirmasi.btn-menunggu:hover {
+    background:#307e8f;
+    color: white;
+}

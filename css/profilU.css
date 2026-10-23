@@ -1,0 +1,586 @@
+@import url('https://fonts.googleapis.com/css2?family=Original+Surfer&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    color: #2c4c81;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    width: calc(100% - 60px);
+    max-width: 1400px;
+    height: 60px;
+    margin: 12px auto 0;
+    padding: 6px 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+   background: linear-gradient(
+        90deg,
+        #feffd6 5%,     /* Kream di pinggir kiri */
+        #b4dbf7 50%,    /* Biru di titik tengah */
+        #feffd6 100%    /* Kream di pinggir kanan */
+    );
+    border-radius: 35px;
+    box-shadow: 0 3px 9px rgba(29, 53, 87, .07);
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.navbar .logo {
+    width: 85px;
+    height: auto;
+    display: block;
+    margin-top: 6px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-links a {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 7px 13px;
+
+    color: #2c4c81;
+    text-decoration: none;
+    font-size: .85rem;
+    font-weight: 600;
+
+    border-radius: 20px;
+    transition: .25s ease;
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #dfda4c;
+    border-radius: 10px;
+    transform: translateX(-50%);
+    transition: width .25s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    background: #fef9cb;
+    transform: translateY(-1px);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 28px;
+}
+
+
+/* =========================
+   KONTEN PROFIL
+========================= */
+
+.profil-content {
+    width: 92%;
+    max-width: 1050px;
+    margin: 45px auto 70px;
+}
+
+
+/* =========================
+   PROFIL CARD
+========================= */
+
+.profil-card {
+    width: 100%;
+
+    background: #fef9cb;
+    border-radius: 20px;
+
+    padding: 25px 28px;
+
+    box-shadow: 0 10px 30px rgba(30, 60, 90, .1);
+
+    display: grid;
+    grid-template-columns: 120px 1fr 2fr;
+
+    gap: 22px;
+    align-items: center;
+
+    margin-bottom: 22px;
+}
+
+.profil-avatar {
+    width: 100px;
+    height: 100px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+        135deg,
+        #b4dbf7,
+        #fcfda2
+    );
+
+    color: #2c4c81;
+    font-size: 40px;
+    font-weight: 700;
+
+    box-shadow: 0 7px 18px rgba(30, 60, 90, .12);
+}
+
+.identity h2 {
+    font-family: "Original Surfer", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 22px;
+    color: #2c4c81;
+    margin-bottom: 5px;
+}
+
+.identity p {
+    font-size: 13px;
+    color: #71808c;
+    margin-bottom: 9px;
+    word-break: break-all;
+}
+
+.profil-role {
+    display: inline-block;
+
+    padding: 5px 13px;
+
+    border-radius: 20px;
+
+    background: #eaf2fa;
+    color: #307e8f;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================
+   STATISTIK
+========================= */
+
+.profil-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.profil-stats div {
+    padding: 14px 8px;
+
+    text-align: center;
+
+    border-radius: 14px;
+    background: #b4dbf7;
+}
+
+.profil-stats strong {
+    display: block;
+    font-size: 25px;
+    color: #2c4c81;
+}
+
+.profil-stats span {
+    font-size: 10px;
+    color: #2c4c81;
+    font-weight: 600;
+}
+
+
+/* =========================
+   PANEL
+========================= */
+
+.profil-panel {
+    width: 100%;
+
+    background: #fcfea491;
+    border-radius: 20px;
+
+    padding: 26px 30px;
+
+    box-shadow: 0 10px 30px rgba(30, 60, 90, .1);
+
+    margin-bottom: 22px;
+
+    scroll-margin-top: 20px;
+}
+
+.panel-title {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    font-family: "Original Surfer", sans-serif;
+    font-weight: 650;
+    font-style: normal;
+    margin-bottom: 20px;
+}
+
+.panel-icon {
+    width: 43px;
+    height: 43px;
+
+    border-radius: 12px;
+
+    background: #eaf6fa;
+    color: #2c4c81;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.panel-title h2 {
+    font-size: 18px;
+    color: #2c4c81;
+}
+
+.panel-title p {
+    font-size: 11px;
+    color: #7a8791;
+    margin-top: 2px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 12px;
+    font-weight: 600;
+    color: #33475b;
+}
+
+.input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrap > i {
+    position: absolute;
+    left: 14px;
+
+    color: #8ba0ac;
+    font-size: 13px;
+
+    z-index: 1;
+}
+
+.input-wrap input {
+    width: 100%;
+
+    padding: 12px 42px;
+
+    border: 1.5px solid #d5e3ee;
+    border-radius: 12px;
+
+    background: #f8fbfe;
+    color: #33475b;
+
+    font-size: 13px;
+    font-family: inherit;
+
+    outline: none;
+
+    transition: .2s;
+}
+
+.input-wrap input:focus {
+    border-color: #307e8f;
+    background: #fff;
+
+    box-shadow: 0 0 0 3px rgba(48, 126, 143, .12);
+}
+
+.password-wrap input {
+    padding-right: 45px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 9px;
+
+    border: 0;
+    background: transparent;
+
+    color: #708894;
+
+    cursor: pointer;
+
+    width: 30px;
+    height: 30px;
+
+    border-radius: 8px;
+}
+
+.toggle-password:hover {
+    background: #eaf2fa;
+    color: #307e8f;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn-simpan {
+    padding: 11px 20px;
+    border: 0;
+    border-radius: 11px;
+    background: #b4dbf7;
+    color: #456cae;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn-simpan:hover {
+    background: #6b96da;
+    color: white;
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   ALERT
+========================= */
+
+.alert {
+    margin-bottom: 18px;
+
+    padding: 11px 14px;
+
+    border-radius: 11px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.alert-sukses {
+    background: #e6f6ea;
+    color: #23773a;
+}
+
+.alert-error {
+    background: #fdeaea;
+    color: #b83232;
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+.logout-panel {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 20px 25px;
+
+    background: #fff;
+
+    border: 1px solid #f1d8d8;
+    border-radius: 18px;
+
+    box-shadow: 0 7px 20px rgba(30, 60, 90, .06);
+}
+
+.logout-panel strong {
+    font-size: 14px;
+    color: #33475b;
+}
+.logout-panel a {
+    padding: 10px 16px;
+
+    border-radius: 11px;
+
+    color: #d14c4c;
+
+    border: 1px solid #e7aaaa;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+.logout-panel a:hover {
+    background: #d14c4c;
+    color: #fff;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+    .profil-content {
+        width: 90%;
+        margin-top: 35px;
+    }
+
+    .profil-card {
+        grid-template-columns: 100px 1fr;
+    }
+
+    .profil-stats {
+        grid-column: 1 / -1;
+    }
+
+    .nav-links a {
+        padding: 7px 9px;
+        font-size: 11px;
+    }
+}
+
+
+/* =========================
+   HP
+========================= */
+
+@media (max-width: 650px) {
+
+    .navbar {
+        width: calc(100% - 24px);
+        margin: 10px 12px 0;
+
+        height: auto;
+        min-height: 60px;
+
+        flex-wrap: wrap;
+        gap: 5px;
+
+        padding: 8px 12px;
+    }
+
+    .navbar .logo {
+        width: 70px;
+    }
+
+    .nav-links {
+        width: 100%;
+
+        overflow-x: auto;
+
+        justify-content: flex-start;
+
+        padding-bottom: 2px;
+    }
+
+    .nav-links a {
+        font-size: 10px;
+        white-space: nowrap;
+    }
+
+    /* Konten tetap di tengah dan tidak mepet */
+    .profil-content {
+        width: calc(100% - 30px);
+        max-width: 520px;
+
+        margin: 25px auto 50px;
+    }
+
+    .profile-heading {
+        padding: 22px;
+    }
+
+    .profile-heading h1 {
+        font-size: 23px;
+    }
+
+    .heading-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .profil-card {
+        grid-template-columns: 1fr;
+
+        text-align: center;
+
+        padding: 24px;
+    }
+
+    .profil-avatar {
+        margin: auto;
+    }
+
+    .profil-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .profil-panel {
+        padding: 22px 18px;
+    }
+
+    .logout-panel {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

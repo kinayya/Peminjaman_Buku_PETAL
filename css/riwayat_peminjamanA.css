@@ -1,0 +1,621 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f8fbfc;
+    color: #2c4c81;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+    width: calc(100% - 50px);
+    margin: 20px auto;
+
+    padding: 8px 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: linear-gradient(
+        90deg,
+        #fcfea4db,
+        #d9e8e8,
+        #b4dbf7
+    );
+
+    border-radius: 50px;
+
+    height: 70px;
+}
+
+
+.logo {
+    width: 95px;
+    height: 95px;
+
+    object-fit: contain;
+
+    margin-top: 6px;
+}
+
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+.nav-links a {
+    text-decoration: none;
+    color: #2c4c81;
+    padding: 11px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.25s ease;
+}
+
+
+.nav-links a:hover,
+.nav-links a.active {
+    background: #fef9cb;
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container {
+    width: calc(100% - 60px);
+
+    max-width: 1400px;
+
+    margin: 35px auto 50px;
+}
+
+
+/* =====================================================
+   PAGE HEADER
+===================================================== */
+
+.page-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+
+    margin-bottom: 25px;
+
+    gap: 15px;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.search-box {
+    width: 280px;
+    position: relative;
+}
+
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #3e9db29f;
+}
+
+
+.search-box input {
+    width: 100%;
+    padding: 11px 16px 11px 40px;
+    border: 2px solid #6b96da;
+    border-radius: 10px;
+    outline: none;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+
+.search-box input:focus {
+    border-color: #b4dbf7;
+    box-shadow: 0 0 0 3px rgba(62, 157, 178, 0.08);
+}
+
+
+/* =====================================================
+   HAPUS PENCARIAN
+===================================================== */
+
+.reset-search {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    margin-bottom: 18px;
+
+    color: #307e8f;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+
+.reset-search:hover {
+    text-decoration: underline;
+}
+
+
+/* =====================================================
+   BUTTON CETAK
+===================================================== */
+
+.btn-cetak {
+    margin-left: auto;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    background: #b4dbf7;
+    color: #456cae;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.25s ease;
+}
+
+
+.btn-cetak:hover {
+    background: #6b96da;
+    color: white;
+    transform: translateY(-3px);
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+#tableRiwayat,
+#tableRiwayatCetak {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   TABLE HEADER
+===================================================== */
+
+#tableRiwayat thead,
+#tableRiwayatCetak thead {
+    background: #feffd6;
+}
+
+
+#tableRiwayat th,
+#tableRiwayatCetak th {
+    padding: 14px 15px;
+    text-align: left;
+    color: #2c4c81;
+    font-size: 13px;
+    font-weight: 700;
+    border-bottom: 2px solid #b4dbf7;
+}
+
+
+/* =====================================================
+   TABLE BODY
+===================================================== */
+
+#tableRiwayat td,
+#tableRiwayatCetak td {
+    padding: 14px 15px;
+
+    border-bottom: 1px solid #eef2f3;
+
+    font-size: 14px;
+
+    vertical-align: middle;
+
+    background: white;
+}
+
+
+#tableRiwayat tbody tr {
+    transition: 0.2s ease;
+}
+
+
+#tableRiwayat tbody tr:hover td {
+    background: #f1f8f9;
+}
+
+
+#tableRiwayat tbody tr:last-child td,
+#tableRiwayatCetak tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =====================================================
+   TABLE WRAPPER
+===================================================== */
+
+.table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+
+    border-radius: 12px;
+}
+
+
+/* =====================================================
+   NAMA USER & BUKU
+===================================================== */
+
+.nama-user,
+.judul-buku {
+    font-weight: 600;
+
+    color: #2c4c81;
+}
+
+
+/* =====================================================
+   STATUS BADGE
+===================================================== */
+
+.status-badge {
+    display: inline-block;
+
+    padding: 5px 12px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+.status-pengajuan {
+    background: #fafc9a99;
+    color: #7a6d12;
+}
+
+
+.status-disetujui {
+    background: #d8ebfb;
+    color: #2a6a9a;
+}
+
+
+.status-dipinjam {
+    background: #d5eef3;
+    color: #307e8f;
+}
+
+
+.status-dikembalikan {
+    background: #dff3e4;
+    color: #2f7d4a;
+}
+
+
+.status-ditolak {
+    background: #fff0f0;
+    color: #d65c5c;
+}
+
+
+/* =====================================================
+   DATA KOSONG
+===================================================== */
+
+.empty-data {
+    text-align: center !important;
+
+    padding: 50px !important;
+
+    color: #8a9aa2 !important;
+}
+
+
+.empty-data i {
+    font-size: 35px;
+
+    margin-bottom: 12px;
+}
+
+
+/* =====================================================
+   PAGINATION (MAKS. 2 NOMOR HALAMAN)
+===================================================== */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    margin-top: 25px;
+}
+
+
+.pagination a {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 8px;
+    color: #6b96da;
+    border: 2px solid #6b96da;
+    font-size: 13px;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+
+.pagination a:hover,
+.pagination a.active {
+    background: #fef9cb;
+    color: #2c4c81;
+}
+
+
+/* =====================================================
+   AREA CETAK (HANYA MUNCUL SAAT PRINT)
+===================================================== */
+
+.report-area {
+    display: none;
+}
+
+
+.report-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+
+    border-bottom: 2px solid #b4dbf7;
+}
+
+
+.report-logo-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+
+.report-logo-title img {
+    width: 60px;
+    height: 60px;
+
+    object-fit: contain;
+}
+
+
+.report-logo-title h2 {
+    font-size: 20px;
+    color: #33475B;
+}
+
+
+.report-logo-title p {
+    font-size: 13px;
+    color: #52646c;
+}
+
+
+.report-date {
+    font-size: 12px;
+    color: #52646c;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .navbar {
+        width: calc(100% - 30px);
+    }
+
+    .container {
+        width: calc(100% - 30px);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .navbar {
+        width: calc(100% - 25px);
+
+        min-height: 70px;
+
+        height: auto;
+
+        border-radius: 25px;
+
+        padding: 10px 15px;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+
+    .logo {
+        width: 80px;
+        height: 80px;
+
+        margin-top: 0;
+    }
+
+
+    .nav-links {
+        width: 100%;
+
+        overflow-x: auto;
+
+        justify-content: flex-start;
+
+        padding-bottom: 3px;
+    }
+
+
+    .nav-links a {
+        flex-shrink: 0;
+    }
+
+
+    .container {
+        width: calc(100% - 25px);
+
+        margin-top: 25px;
+    }
+
+
+    .page-header {
+        align-items: stretch;
+
+        gap: 12px;
+
+        flex-direction: column;
+    }
+
+
+    .search-box {
+        width: 100%;
+    }
+
+
+    .btn-cetak {
+        margin-left: 0;
+
+        width: 100%;
+
+        justify-content: center;
+    }
+
+
+    #tableRiwayat {
+        min-width: 900px;
+    }
+
+}
+
+
+/* =====================================================
+   PRINT
+   Yang dicetak: seluruh riwayat (bukan hanya halaman
+   yang sedang dibuka), lengkap dengan kop laporan.
+===================================================== */
+
+@media print {
+
+    @page {
+        size: A4 landscape;
+        margin: 14mm;
+    }
+
+
+    body {
+        background: white;
+    }
+
+
+    .navbar,
+    .page-header,
+    .reset-search,
+    .screen-only {
+        display: none !important;
+    }
+
+
+    .container {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+    }
+
+
+    .report-area {
+        display: block;
+    }
+
+
+    #tableRiwayatCetak {
+        min-width: 0;
+    }
+
+
+    #tableRiwayatCetak th,
+    #tableRiwayatCetak td {
+        padding: 8px 10px;
+
+        font-size: 12px;
+
+        border: 1px solid #c9d6da;
+    }
+
+
+    #tableRiwayatCetak thead {
+        display: table-header-group;
+    }
+
+
+    #tableRiwayatCetak tr {
+        page-break-inside: avoid;
+    }
+
+
+    .report-heading,
+    .status-badge,
+    #tableRiwayatCetak thead {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+}

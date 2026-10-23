@@ -1,0 +1,582 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f8fbfc;
+    color: #2c4c81;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+    width: calc(100% - 50px);
+    margin: 20px auto;
+
+    padding: 8px 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: linear-gradient(
+        90deg,
+        #fcfea4db,
+        #d9e8e8,
+        #b4dbf7
+    );
+
+    border-radius: 50px;
+
+    height: 70px;
+}
+
+
+.logo {
+    width: 95px;
+    height: 95px;
+
+    object-fit: contain;
+
+    margin-top: 6px;
+}
+
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+.nav-links a {
+    text-decoration: none;
+    color: #2c4c81;
+    padding: 11px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.25s ease;
+}
+
+
+.nav-links a:hover,
+.nav-links a.active {
+    background: #fef9cb;
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container {
+    width: calc(100% - 60px);
+
+    max-width: 1400px;
+
+    margin: 35px auto 50px;
+}
+
+
+/* =====================================================
+   PAGE HEADER
+===================================================== */
+
+.page-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+
+    margin-bottom: 20px;
+
+    gap: 15px;
+}
+
+
+/* =====================================================
+   FILTER TABS (STATUS)
+===================================================== */
+
+.status-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 22px;
+}
+
+
+.status-tabs a {
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #53646d;
+    background: #eef2f3;
+    transition: 0.2s ease;
+}
+
+
+.status-tabs a:hover {
+    background: #dfe7e9;
+}
+
+
+.status-tabs a.active {
+    background: #3e9db2;
+    color: white;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.search-box {
+    width: 280px;
+    position: relative;
+}
+
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #456cae;
+}
+
+
+.search-box input {
+    width: 100%;
+    padding: 11px 16px 11px 40px;
+    border: 2px solid #6b96da;
+    border-radius: 10px;
+    outline: none;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+
+.search-box input:focus {
+    border-color: #b4dbf7;
+    box-shadow: 0 0 0 3px rgba(62, 157, 178, 0.08);
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+#tablePeminjaman {
+    width: 100%;
+    min-width: 1050px;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+
+#tablePeminjaman thead {
+    background: #feffd6;
+}
+
+
+#tablePeminjaman th {
+    padding: 14px 15px;
+    text-align: left;
+    color: #2c4c81;
+    font-size: 13px;
+    font-weight: 700;
+    border-bottom: 2px solid #b4dbf7;
+}
+
+
+#tablePeminjaman td {
+    padding: 14px 15px;
+
+    border-bottom: 1px solid #eef2f3;
+
+    font-size: 14px;
+
+    vertical-align: middle;
+
+    background: white;
+}
+
+
+#tablePeminjaman tbody tr {
+    transition: 0.2s ease;
+}
+
+
+#tablePeminjaman tbody tr:hover td {
+    background: #f1f8f9;
+}
+
+
+#tablePeminjaman tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+.table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+
+    border-radius: 12px;
+}
+
+
+/* =====================================================
+   BUKU (GAMBAR + JUDUL)
+===================================================== */
+
+.buku-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.book-image {
+    width: 42px;
+    height: 58px;
+
+    object-fit: cover;
+
+    border-radius: 5px;
+
+    flex-shrink: 0;
+}
+
+
+.no-image {
+    width: 42px;
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 5px;
+
+    background: #edf3f5;
+
+    color: #2c4c81;
+
+    font-size: 16px;
+
+    flex-shrink: 0;
+}
+
+
+.judul-buku {
+    font-weight: 600;
+
+    color: #2c4c81;
+}
+
+
+/* =====================================================
+   PEMINJAM
+===================================================== */
+
+.nama-peminjam {
+    font-weight: 600;
+    color: #2c4c81;
+    display: block;
+}
+
+
+.email-peminjam {
+    font-size: 12px;
+    color: #8a9aa2;
+}
+
+
+/* =====================================================
+   BADGE STATUS
+===================================================== */
+
+.badge-status {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+
+.badge-pengajuan {
+    background: #eeeadc;
+    color: #848282;
+}
+
+
+.badge-disetujui {
+    background: #d7ecff;
+    color: #1d6fa5;
+}
+
+
+.badge-dipinjam {
+    background: #dcf3e2;
+    color: #1e8a4c;
+}
+
+
+.badge-dikembalikan {
+    background: #e6e6e6;
+    color: #55606b;
+}
+
+
+.badge-ditolak {
+    background: #ffe1e1;
+    color: #c1121f;
+}
+
+
+/* =====================================================
+   AKSI
+===================================================== */
+
+#tablePeminjaman td.aksi {
+    white-space: nowrap;
+}
+
+
+.btn-setujui,
+.btn-tolak,
+.btn-dipinjam {
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12.5px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: 0.2s ease;
+    margin-right: 5px;
+}
+
+
+.btn-setujui {
+    background: #dcf3e2;
+    color: #1e8a4c;
+}
+
+
+.btn-setujui:hover {
+    background: #1e8a4c;
+    color: white;
+    transform: translateY(-2px);
+}
+
+
+.btn-tolak {
+    background: #ffe1e1;
+    color: #c1121f;
+}
+
+
+.btn-tolak:hover {
+    background: #c1121f;
+    color: white;
+    transform: translateY(-2px);
+}
+
+
+.btn-dipinjam {
+    background: #d7ecff;
+    color: #1d6fa5;
+}
+
+
+.btn-dipinjam:hover {
+    background: #1d6fa5;
+    color: white;
+    transform: translateY(-2px);
+}
+
+
+.aksi-selesai {
+    font-size: 12.5px;
+    color: #b3bcc2;
+    font-style: italic;
+}
+
+
+/* =====================================================
+   DATA KOSONG
+===================================================== */
+
+.empty-data {
+    text-align: center !important;
+
+    padding: 50px !important;
+
+    color: #8a9aa2 !important;
+}
+
+
+.empty-data i {
+    font-size: 35px;
+
+    margin-bottom: 12px;
+}
+
+
+/* =====================================================
+   PAGINATION
+===================================================== */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    margin-top: 25px;
+}
+
+
+.pagination a {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 8px;
+    color: #6b96da;
+    border: 2px solid #6b96da;
+    font-size: 13px;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+
+.pagination a:hover,
+.pagination a.active {
+    background: #fef9cb;
+    color: #2c4c81;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .navbar {
+        width: calc(100% - 30px);
+    }
+
+    .container {
+        width: calc(100% - 30px);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .navbar {
+        width: calc(100% - 25px);
+
+        min-height: 70px;
+
+        height: auto;
+
+        border-radius: 25px;
+
+        padding: 10px 15px;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+
+    .logo {
+        width: 80px;
+        height: 80px;
+
+        margin-top: 0;
+    }
+
+
+    .nav-links {
+        width: 100%;
+
+        overflow-x: auto;
+
+        justify-content: flex-start;
+
+        padding-bottom: 3px;
+    }
+
+
+    .nav-links a {
+        flex-shrink: 0;
+    }
+
+
+    .container {
+        width: calc(100% - 25px);
+
+        margin-top: 25px;
+    }
+
+
+    .page-header {
+        align-items: stretch;
+
+        gap: 12px;
+
+        flex-direction: column;
+    }
+
+
+    .search-box {
+        width: 100%;
+    }
+
+
+    .table-wrapper {
+        overflow-x: auto;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+
+    #tablePeminjaman {
+        min-width: 1050px;
+    }
+
+}
