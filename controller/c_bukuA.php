@@ -189,11 +189,15 @@ try {
         // Tangkap kata kunci pencarian dari URL
         $keyword = trim($_GET['keyword'] ?? '');
 
-        if (!empty($keyword)) {
-            // Mengambil data terfilter jika kata kunci diisi
-            $total_data = $buku->hitung_total_buku_cari($keyword);
+        // Tangkap filter kategori (0 = semua kategori)
+        $id_kategori = (int) ($_GET['kategori'] ?? 0);
+
+        // Catatan: pakai !== '' supaya kata kunci "0" (stok 0) tetap bisa dicari
+        if ($keyword !== '' || $id_kategori > 0) {
+            // Mengambil data terfilter jika kata kunci / kategori dipilih
+            $total_data = $buku->hitung_total_buku_cari($keyword, $id_kategori);
             $total_halaman = ceil($total_data / $limit);
-            $data_buku = $buku->tampil_data_buku_cari_page($keyword, $start, $limit);
+            $data_buku = $buku->tampil_data_buku_cari_page($keyword, $start, $limit, $id_kategori);
         } else {
             // Mengambil seluruh data jika pencarian kosong
             $total_data = $buku->hitung_total_buku();

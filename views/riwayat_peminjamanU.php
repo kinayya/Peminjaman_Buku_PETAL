@@ -176,7 +176,9 @@ $label_status = [
         }
 
         .nav-links a {
-
+            font-family: "Original Surfer", sans-serif;
+            font-weight: 600;
+            font-style: normal;
             position: relative;
 
             display: flex;
@@ -187,14 +189,11 @@ $label_status = [
 
             padding: 7px 13px;
 
-            color: #1f535e;
+            color: #2c4c81;
 
             text-decoration: none;
 
-            font-size: 0.85rem;
-
-            font-weight: 600;
-
+            font-size: 0.95rem;
             border-radius: 20px;
 
             transition:
@@ -210,27 +209,16 @@ $label_status = [
         ===================================================== */
 
         .nav-links a::after {
-
             content: "";
-
             position: absolute;
-
             bottom: 3px;
-
             left: 50%;
-
             width: 0;
-
             height: 2px;
-
             background-color: #dfda4c;
-
             border-radius: 10px;
-
             transform: translateX(-50%);
-
             transition: width 0.25s ease;
-
         }
 
 
@@ -720,6 +708,46 @@ $label_status = [
             color: #777;
 
             font-style: italic;
+
+        }
+
+
+        /* PESAN DARI ADMIN (di kolom aksi saat sudah dikembalikan) */
+
+        .pesan-admin {
+
+            display: block;
+
+            margin-top: 6px;
+
+            padding: 8px 10px;
+
+            background: #FDF0D5;
+
+            border: 1px solid #f0d9a8;
+
+            border-radius: 10px;
+
+            font-size: 0.68rem;
+
+            line-height: 1.5;
+
+            color: #33475B;
+
+            font-style: normal;
+
+            max-width: 240px;
+
+        }
+
+
+        .pesan-admin strong {
+
+            display: block;
+
+            color: #1D3557;
+
+            font-size: 0.7rem;
 
         }
 
@@ -1417,6 +1445,30 @@ $label_status = [
                                                 Tidak ada aksi
 
                                             </span>
+
+
+                                            <?php
+                                                $catatan_admin = trim((string) ($r->keterangan_pengembalian ?? ''));
+                                                $ada_pesan = $status === 'dikembalikan'
+                                                    && $catatan_admin !== ''
+                                                    && $catatan_admin !== 'Dikonfirmasi oleh admin';
+                                            ?>
+
+                                            <?php if ($ada_pesan): ?>
+
+                                                <span class="pesan-admin">
+
+                                                    <strong>
+                                                        <i class="fa-solid fa-envelope-circle-check"></i>
+                                                        Pesan dari admin
+                                                    </strong>
+
+                                                    <?= htmlspecialchars($catatan_admin, ENT_QUOTES, 'UTF-8'); ?>
+
+                                                </span>
+
+                                            <?php endif; ?>
+
 
 
                                         <?php endif; ?>

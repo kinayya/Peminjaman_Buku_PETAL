@@ -51,12 +51,14 @@ body {
 }
 
 .nav-links a {
+    font-family: "Original Surfer", sans-serif;
+    font-weight: 600;
+    font-style: normal;
     text-decoration: none;
     color: #2c4c81;
     padding: 11px 18px;
     border-radius: 999px;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 15px;
     transition: 0.25s ease;
 }
 
@@ -721,5 +723,41 @@ body {
         width: 100%;
         justify-content: center;
         text-align: center;
+    }
+}
+
+
+/* ===== PENCARIAN + FILTER KATEGORI ===== */
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-form .search-box {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.filter-kategori {
+    padding: 9px 14px;
+    border: 2px solid #6b96da;
+    border-radius: 20px;
+    background: #fff;
+    color: #33475B;
+    font-size: 0.85rem;
+    outline: none;
+    cursor: pointer;
+    max-width: 200px;
+}
+
+.filter-kategori:focus {
+    border-color: #f5f263;
+    box-shadow: 0 0 0 3px rgba(232, 229, 78, 0.26);
+}
+
+@media (max-width: 768px) {
+    .search-form {
+        width: 100%;
     }
 }

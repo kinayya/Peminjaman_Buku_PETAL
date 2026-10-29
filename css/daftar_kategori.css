@@ -57,16 +57,14 @@ body {
 
 
 .nav-links a {
-    text-decoration: none;
-    color: #33475B;
-
-    padding: 11px 18px;
-
-    border-radius: 999px;
-
-    font-size: 14px;
+    font-family: "Original Surfer", sans-serif;
     font-weight: 600;
-
+    font-style: normal;
+    text-decoration: none;
+    color: #2c4c81;
+    padding: 11px 18px;
+    border-radius: 999px;
+    font-size: 15px;
     transition: 0.25s ease;
 }
 

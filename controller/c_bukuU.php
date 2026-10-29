@@ -29,10 +29,15 @@ $start = ($page - 1) * $limit;
 
 $keyword = trim($_GET['keyword'] ?? '');
 
-if (!empty($keyword)) {
-    // Mengambil data terfilter jika kata kunci diisi
-    $total_data = $buku->hitung_total_buku_cari($keyword);
-    $books      = $buku->tampil_data_buku_cari_page($keyword, $start, $limit);
+// Filter kategori (0 = semua kategori) + daftar kategori untuk dropdown
+$id_kategori   = (int) ($_GET['kategori'] ?? 0);
+$data_kategori = $buku->tampil_kategori();
+
+// Catatan: pakai !== '' supaya kata kunci "0" (stok 0) tetap bisa dicari
+if ($keyword !== '' || $id_kategori > 0) {
+    // Mengambil data terfilter jika kata kunci / kategori dipilih
+    $total_data = $buku->hitung_total_buku_cari($keyword, $id_kategori);
+    $books      = $buku->tampil_data_buku_cari_page($keyword, $start, $limit, $id_kategori);
 } else {
     // Mengambil seluruh data jika pencarian kosong
     $total_data = $buku->hitung_total_buku();

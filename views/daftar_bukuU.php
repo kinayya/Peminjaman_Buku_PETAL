@@ -116,15 +116,17 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
         }
 
         .nav-links a {
+            font-family: "Original Surfer", sans-serif;
+            font-weight: 600;
+            font-style: normal;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 7px 13px;
-            color: #1f535e;
+            color: #2c4c81;
             text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
+            font-size: 0.95rem;
             border-radius: 20px;
             transition:
                 color 0.25s ease,
@@ -218,6 +220,30 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
             color: #456cae;
             font-size: 0.8rem;
             pointer-events: none;
+        }
+
+        .search-form {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-kategori {
+            padding: 8px 13px;
+            border: 2px solid #6b96da;
+            border-radius: 20px;
+            background: #fff;
+            color: #33475B;
+            font-size: 0.78rem;
+            outline: none;
+            cursor: pointer;
+            max-width: 190px;
+            transition: 0.2s;
+        }
+
+        .filter-kategori:focus {
+            border-color: #f5f263;
+            box-shadow: 0 0 0 3px rgba(232, 229, 78, 0.26);
         }
 
 
@@ -1045,20 +1071,38 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
         <form
             action=""
             method="GET"
-            class="search-box">
+            class="search-form">
 
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <div class="search-box">
 
-            <input
-                type="text"
-                name="keyword"
-                value="<?= htmlspecialchars(
-                    $keyword ?? '',
-                    ENT_QUOTES,
-                    'UTF-8'
-                ); ?>"
-                placeholder="Cari judul, pengarang, penerbit..."
-            >
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    name="keyword"
+                    value="<?= htmlspecialchars(
+                        $keyword ?? '',
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ); ?>"
+                    placeholder="Cari judul, pengarang, penerbit, stok..."
+                >
+
+            </div>
+
+            <select name="kategori" class="filter-kategori" onchange="this.form.submit()">
+
+                <option value="0">Semua Kategori</option>
+
+                <?php foreach (($data_kategori ?? []) as $kat): ?>
+                    <option
+                        value="<?= (int) $kat->id_kategori; ?>"
+                        <?= ((int) $id_kategori === (int) $kat->id_kategori) ? 'selected' : ''; ?>>
+                        <?= htmlspecialchars($kat->nama_kategori, ENT_QUOTES, 'UTF-8'); ?>
+                    </option>
+                <?php endforeach; ?>
+
+            </select>
 
         </form>
 
@@ -1270,7 +1314,7 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
                     <a
                         href="?page=<?= $page - 1; ?>&keyword=<?= urlencode(
                             $keyword ?? ''
-                        ); ?>"
+                        ); ?>&kategori=<?= (int) ($id_kategori ?? 0); ?>"
                         title="Halaman Sebelumnya"
                     >
 
@@ -1292,7 +1336,7 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
                     <a
                         href="?page=<?= $i; ?>&keyword=<?= urlencode(
                             $keyword ?? ''
-                        ); ?>"
+                        ); ?>&kategori=<?= (int) ($id_kategori ?? 0); ?>"
 
                         class="<?= ($i == $page)
                             ? 'active'
@@ -1313,7 +1357,7 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
                     <a
                         href="?page=<?= $page + 1; ?>&keyword=<?= urlencode(
                             $keyword ?? ''
-                        ); ?>"
+                        ); ?>&kategori=<?= (int) ($id_kategori ?? 0); ?>"
                         title="Halaman Berikutnya"
                     >
 

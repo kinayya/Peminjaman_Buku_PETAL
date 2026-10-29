@@ -59,18 +59,16 @@ body {
 
 .nav-links a {
     position: relative;
-
+    font-family: "Original Surfer", sans-serif;
+    font-weight: 600;
+    font-style: normal;
     display: flex;
     align-items: center;
     justify-content: center;
-
     padding: 7px 13px;
-
     color: #2c4c81;
     text-decoration: none;
-    font-size: .85rem;
-    font-weight: 600;
-
+    font-size: .95rem;
     border-radius: 20px;
     transition: .25s ease;
 }

@@ -2,7 +2,9 @@
 include_once __DIR__ . '/../controller/c_bukuA.php';
 
 $keyword = $_GET['keyword'] ?? '';
-$kw_param = !empty($keyword) ? '&keyword=' . urlencode($keyword) : '';
+$kategori_aktif = (int) ($_GET['kategori'] ?? 0);
+$kw_param = ($keyword !== '' ? '&keyword=' . urlencode($keyword) : '')
+          . ($kategori_aktif > 0 ? '&kategori=' . $kategori_aktif : '');
 
 ?>
 
@@ -52,14 +54,26 @@ $kw_param = !empty($keyword) ? '&keyword=' . urlencode($keyword) : '';
     <!-- PAGE HEADER -->
     <div class="page-header">
         <!-- SEARCH FORM -->
-        <form method="GET" action="daftar_bukuA.php" class="search-box">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input 
-                type="text" 
-                name="keyword" 
-                value="<?= htmlspecialchars($keyword, ENT_QUOTES, 'UTF-8'); ?>" 
-                placeholder="Cari buku lalu tekan Enter..."
-            >
+        <form method="GET" action="daftar_bukuA.php" class="search-form">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input 
+                    type="text" 
+                    name="keyword" 
+                    value="<?= htmlspecialchars($keyword, ENT_QUOTES, 'UTF-8'); ?>" 
+                    placeholder="Cari judul, pengarang, penerbit, stok..."
+                >
+            </div>
+
+            <select name="kategori" class="filter-kategori" onchange="this.form.submit()">
+                <option value="0">Semua Kategori</option>
+                <?php foreach ($data_kategori as $kat): ?>
+                    <option value="<?= (int) $kat->id_kategori; ?>"
+                        <?= $kategori_aktif === (int) $kat->id_kategori ? 'selected' : ''; ?>>
+                        <?= htmlspecialchars($kat->nama_kategori, ENT_QUOTES, 'UTF-8'); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </form>
 
         <!-- BUTTON TAMBAH -->
@@ -149,8 +163,7 @@ $kw_param = !empty($keyword) ? '&keyword=' . urlencode($keyword) : '';
                                 data-sinopsis="<?= htmlspecialchars($b->sinopsis ?? '', ENT_QUOTES, 'UTF-8'); ?>"
                                 data-gambar="<?= htmlspecialchars($b->link_gambar ?? '', ENT_QUOTES, 'UTF-8'); ?>"
                                 data-kategori="<?= isset($b->id_kategori) ? (int)$b->id_kategori : ''; ?>"
-                                onclick="bukaModalEditViaElement(this)"
-                            >
+                                onclick="bukaModalEditViaElement(this)">
                                 <i class="fa-solid fa-pen"></i>
                             </button>
 

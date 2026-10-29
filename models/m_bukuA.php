@@ -257,15 +257,30 @@ class buku {
 
 
     // =====================================================
-    // HITUNG TOTAL BUKU BERDASARKAN KATA KUNCI (SEARCH)
+    // HITUNG TOTAL BUKU BERDASARKAN KATA KUNCI + KATEGORI
+    // Kata kunci dicocokkan ke: judul, pengarang, penerbit, stok
+    // $id_kategori = 0 berarti semua kategori
     // =====================================================
-    public function hitung_total_buku_cari($keyword) {
+    public function hitung_total_buku_cari($keyword, $id_kategori = 0) {
 
         $param_keyword = "%$keyword%";
+        $id_kategori   = (int) $id_kategori;
 
-        $sql = "SELECT COUNT(*) AS total 
-                FROM buku 
-                WHERE judul LIKE ? OR pengarang LIKE ? OR penerbit LIKE ?";
+        $sql = "SELECT COUNT(*) AS total
+                FROM buku
+                WHERE (buku.judul LIKE ?
+                    OR buku.pengarang LIKE ?
+                    OR buku.penerbit LIKE ?
+                    OR CAST(buku.stok AS CHAR) LIKE ?)";
+
+        $types  = "ssss";
+        $params = [$param_keyword, $param_keyword, $param_keyword, $param_keyword];
+
+        if ($id_kategori > 0) {
+            $sql    .= " AND buku.id_kategori = ?";
+            $types  .= "i";
+            $params[] = $id_kategori;
+        }
 
         $stmt = $this->conn->prepare($sql);
 
@@ -273,7 +288,7 @@ class buku {
             return 0;
         }
 
-        $stmt->bind_param("sss", $param_keyword, $param_keyword, $param_keyword);
+        $stmt->bind_param($types, ...$params);
         $stmt->execute();
 
         $result = $stmt->get_result()->fetch_assoc();
@@ -285,21 +300,38 @@ class buku {
 
 
     // =====================================================
-    // TAMPIL BUKU DENGAN PENCARIAN & PAGINATION
+    // TAMPIL BUKU DENGAN PENCARIAN (JUDUL / PENGARANG /
+    // PENERBIT / STOK) + FILTER KATEGORI + PAGINATION
     // =====================================================
-    public function tampil_data_buku_cari_page($keyword, $start, $limit) {
+    public function tampil_data_buku_cari_page($keyword, $start, $limit, $id_kategori = 0) {
 
         $param_keyword = "%$keyword%";
-        $start = (int) $start;
-        $limit = (int) $limit;
+        $start         = (int) $start;
+        $limit         = (int) $limit;
+        $id_kategori   = (int) $id_kategori;
 
-        $sql = "SELECT buku.*, kategori.nama_kategori 
-                FROM buku 
-                LEFT JOIN kategori 
-                ON buku.id_kategori = kategori.id_kategori 
-                WHERE buku.judul LIKE ? OR buku.pengarang LIKE ? OR buku.penerbit LIKE ? 
-                ORDER BY buku.id_buku DESC 
-                LIMIT ?, ?";
+        $sql = "SELECT buku.*, kategori.nama_kategori
+                FROM buku
+                LEFT JOIN kategori
+                ON buku.id_kategori = kategori.id_kategori
+                WHERE (buku.judul LIKE ?
+                    OR buku.pengarang LIKE ?
+                    OR buku.penerbit LIKE ?
+                    OR CAST(buku.stok AS CHAR) LIKE ?)";
+
+        $types  = "ssss";
+        $params = [$param_keyword, $param_keyword, $param_keyword, $param_keyword];
+
+        if ($id_kategori > 0) {
+            $sql    .= " AND buku.id_kategori = ?";
+            $types  .= "i";
+            $params[] = $id_kategori;
+        }
+
+        $sql    .= " ORDER BY buku.id_buku DESC LIMIT ?, ?";
+        $types  .= "ii";
+        $params[] = $start;
+        $params[] = $limit;
 
         $stmt = $this->conn->prepare($sql);
 
@@ -307,7 +339,7 @@ class buku {
             return [];
         }
 
-        $stmt->bind_param("sssii", $param_keyword, $param_keyword, $param_keyword, $start, $limit);
+        $stmt->bind_param($types, ...$params);
         $stmt->execute();
 
         $result_set = $stmt->get_result();
