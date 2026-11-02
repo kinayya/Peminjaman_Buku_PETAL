@@ -5,7 +5,8 @@
 // Semua akses data lewat model 'buku' (models/m_bukuA.php)
 // =====================================================
 
-session_start();
+include_once __DIR__ . '/auth.php';
+auth_wajib_user(true); // tamu boleh melihat katalog; admin dialihkan
 
 include_once __DIR__ . '/../models/m_bukuA.php';
 
@@ -15,7 +16,6 @@ $buku = new buku();
 // STATUS LOGIN USER (dipakai untuk validasi tombol pinjam)
 // =====================================================
 $is_logged_in = isset($_SESSION['data']['id_user']);
-$id_user      = $is_logged_in ? (int) $_SESSION['data']['id_user'] : 0;
 
 // =====================================================
 // PENCARIAN & PAGINATION

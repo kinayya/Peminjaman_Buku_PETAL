@@ -27,6 +27,7 @@ $label_status = [
 
     <!-- CSS -->
     <link rel="stylesheet" href="../css/peminjamanA.css">
+    <link rel="stylesheet" href="../css/admin_responsive.css">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -63,11 +64,8 @@ $label_status = [
         <!-- SEARCH FORM -->
         <form method="GET" action="peminjamanA.php" class="search-box">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input
-                type="text"
-                name="keyword"
-                value="<?= htmlspecialchars($keyword, ENT_QUOTES, 'UTF-8'); ?>"
-                placeholder="Cari nama peminjam / judul buku / status..."
+            <input type="text" name="keyword" value="<?= htmlspecialchars($keyword, ENT_QUOTES, 'UTF-8'); ?>"
+             placeholder="Cari Peminjaman"
             >
         </form>
     </div>

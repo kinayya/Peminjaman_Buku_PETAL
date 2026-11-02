@@ -19,6 +19,7 @@ $kw_param = ($keyword !== '' ? '&keyword=' . urlencode($keyword) : '')
 
     <!-- CSS -->
     <link rel="stylesheet" href="../css/daftar_bu.css">
+    <link rel="stylesheet" href="../css/admin_responsive.css">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -83,6 +84,7 @@ $kw_param = ($keyword !== '' ? '&keyword=' . urlencode($keyword) : '')
     </div>
 
     <!-- TABLE DATA BUKU -->
+    <div class="table-wrapper">
     <table id="tableBuku">
         <thead>
             <tr>
@@ -186,6 +188,7 @@ $kw_param = ($keyword !== '' ? '&keyword=' . urlencode($keyword) : '')
             <?php endif; ?>
         </tbody>
     </table>
+    </div>
 
     <!-- PAGINATION -->
     <?php if (isset($total_halaman) && $total_halaman > 1): ?>

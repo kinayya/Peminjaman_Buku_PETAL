@@ -51,32 +51,6 @@ class m_user
         return $data;
     }
 
-
-    // =====================================================
-    // TAMPIL SEMUA USER
-    // =====================================================
-
-    public function tampil_data()
-{
-    $sql = "SELECT id_user, Email, username, password, role
-            FROM users
-            ORDER BY id_user DESC";
-
-    $query = mysqli_query($this->conn, $sql);
-
-    $result = [];
-
-    if ($query && mysqli_num_rows($query) > 0) {
-
-        while ($data = mysqli_fetch_object($query)) {
-            $result[] = $data;
-        }
-    }
-
-    return $result;
-}
-
-
     // =====================================================
     // TAMPIL USER + PAGINATION
     // =====================================================
@@ -139,48 +113,6 @@ class m_user
 
         return $result;
     }
-
-
-    // =====================================================
-    // AMBIL SATU USER
-    // =====================================================
-
-    public function tampil_satu(
-        $id_user
-    )
-    {
-        $id_user = (int) $id_user;
-
-        $sql = "SELECT id_user, Email, username, role
-                FROM users
-                WHERE id_user = ?";
-
-        $stmt = $this->conn->prepare($sql);
-
-        if (!$stmt) {
-            return null;
-        }
-
-        $stmt->bind_param(
-            "i",
-            $id_user
-        );
-
-        $stmt->execute();
-
-        $query = $stmt->get_result();
-
-        $data = null;
-
-        if ($query) {
-            $data = $query->fetch_object();
-        }
-
-        $stmt->close();
-
-        return $data;
-    }
-
 
     // =====================================================
     // EDIT USER

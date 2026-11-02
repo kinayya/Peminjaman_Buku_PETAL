@@ -36,6 +36,7 @@ $kw_param =
         rel="stylesheet"
         href="../css/daftar_bu.css"
     >
+    <link rel="stylesheet" href="../css/admin_responsive.css">
 
 
     <!-- FONT AWESOME -->

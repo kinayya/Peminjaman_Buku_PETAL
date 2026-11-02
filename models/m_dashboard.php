@@ -293,11 +293,6 @@ class m_dashboard
         return $hasil;
     }
 
-    public function hitung_total_riwayat_user_admin()
-    {
-        return $this->hitung("SELECT COUNT(*) AS total FROM peminjaman");
-    }
-
 }
 
 ?>

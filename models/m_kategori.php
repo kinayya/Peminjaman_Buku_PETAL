@@ -12,28 +12,6 @@ class kategori
         $this->conn = $db->koneksi;
     }
 
-
-    // =====================================================
-    // TAMPIL SEMUA DATA KATEGORI
-    // =====================================================
-    public function tampil_data_kategori()
-    {
-        $sql = "SELECT *
-                FROM kategori
-                ORDER BY id_kategori DESC";
-
-        $query = mysqli_query($this->conn, $sql);
-
-        $result = [];
-
-        while ($data = mysqli_fetch_object($query)) {
-            $result[] = $data;
-        }
-
-        return $result;
-    }
-
-
     // =====================================================
     // TAMPIL KATEGORI DENGAN PAGINATION
     // =====================================================
@@ -84,39 +62,6 @@ class kategori
 
         return $result;
     }
-
-
-    // =====================================================
-    // AMBIL SATU KATEGORI
-    // =====================================================
-    public function tampil_satu_kategori($id_kategori)
-    {
-        $sql = "SELECT *
-                FROM kategori
-                WHERE id_kategori = ?";
-
-        $stmt = $this->conn->prepare($sql);
-
-        if (!$stmt) {
-            return null;
-        }
-
-        $stmt->bind_param(
-            "i",
-            $id_kategori
-        );
-
-        $stmt->execute();
-
-        $result = $stmt->get_result();
-
-        $data = $result->fetch_object();
-
-        $stmt->close();
-
-        return $data;
-    }
-
 
     // =====================================================
     // EDIT KATEGORI

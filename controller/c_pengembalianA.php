@@ -1,27 +1,13 @@
 <?php
 
-session_start();
+include_once __DIR__ . '/auth.php';
+auth_wajib_admin();
 
 include_once __DIR__ . '/../models/m_peminjaman.php';
 
 $peminjaman = new m_peminjaman();
 
 
-// =====================================================
-// PROTEKSI HALAMAN: HANYA ADMIN
-// =====================================================
-
-if (
-    !isset($_SESSION['data']) ||
-    !isset($_SESSION['data']['role']) ||
-    $_SESSION['data']['role'] !== 'admin'
-) {
-    echo "<script>
-            alert('Silakan login sebagai admin terlebih dahulu.');
-            window.location='../index.php';
-          </script>";
-    exit;
-}
 
 try {
 
@@ -80,16 +66,6 @@ try {
         $total_halaman     = ceil($total_data / $limit);
         $data_pengembalian = $peminjaman->tampil_data_pengembalian_page($start, $limit);
     }
-
-    // =====================================================
-    // STATISTIK RINGKAS UNTUK KARTU DI ATAS TABEL
-    // =====================================================
-
-    $stat_menunggu_konfirmasi = $peminjaman->hitung_menunggu_konfirmasi();
-    $stat_sedang_dipinjam     = $peminjaman->hitung_sedang_dipinjam_tanpa_pengajuan();
-    $stat_total_dikembalikan  = $peminjaman->hitung_total_dikembalikan();
-
-    $nama_admin = $_SESSION['data']['username'] ?? 'Admin';
 
 } catch (Exception $e) {
 

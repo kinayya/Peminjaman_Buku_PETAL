@@ -1,6 +1,7 @@
 <?php
 
-session_start();
+include_once __DIR__ . '/auth.php';
+auth_wajib_user();
 
 include_once __DIR__ . '/../models/m_peminjaman.php';
 
@@ -11,23 +12,6 @@ if (
     $_GET['aksi'] === 'tambah' &&
     $_SERVER['REQUEST_METHOD'] === 'POST'
 ) {
-
-    // =====================================================
-    // CEK LOGIN
-    // =====================================================
-
-    if (
-        !isset($_SESSION['data']) ||
-        !isset($_SESSION['data']['id_user'])
-    ) {
-
-        echo "<script>
-                alert('Silakan login terlebih dahulu.');
-                window.location='../index.php';
-              </script>";
-
-        exit;
-    }
 
 
     $id_user = (int) $_SESSION['data']['id_user'];

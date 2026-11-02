@@ -179,12 +179,51 @@ class m_peminjaman
 
 
     // =====================================================
-    // (ADMIN) PENCARIAN PEMINJAMAN (username, judul, status) + PAGINATION
+    // HELPER: kondisi pencarian tanggal (bisa ketik 2026-10, 29-10-2026, 29/10, dst.)
+    // =====================================================
+
+    private function kondisi_tanggal($kolom)
+    {
+        return "(DATE_FORMAT($kolom, '%Y-%m-%d') LIKE ? OR DATE_FORMAT($kolom, '%d-%m-%Y') LIKE ?)";
+    }
+
+    // Label status persis seperti yang tampil di tabel, supaya bisa dicari
+    // dengan mengetik "Menunggu Persetujuan", "Sedang Dipinjam", dst.
+    private function label_status_peminjaman_sql()
+    {
+        return "CASE peminjaman.status
+                    WHEN 'pengajuan'    THEN 'Menunggu Persetujuan'
+                    WHEN 'disetujui'    THEN 'Disetujui'
+                    WHEN 'dipinjam'     THEN 'Sedang Dipinjam'
+                    WHEN 'dikembalikan' THEN 'Dikembalikan'
+                    WHEN 'ditolak'      THEN 'Ditolak'
+                    ELSE peminjaman.status
+                END";
+    }
+
+    private function label_status_pengembalian_sql()
+    {
+        return "CASE
+                    WHEN peminjaman.status = 'dipinjam' AND pengembalian.id_pengembalian IS NOT NULL THEN 'Menunggu Konfirmasi'
+                    WHEN peminjaman.status = 'dipinjam' THEN 'Sedang Dipinjam'
+                    ELSE 'Sudah Dikembalikan'
+                END";
+    }
+
+    private function normalisasi_keyword_tanggal($keyword)
+    {
+        return '%' . str_replace('/', '-', trim($keyword)) . '%';
+    }
+
+
+    // =====================================================
+    // (ADMIN) PENCARIAN PEMINJAMAN (username, judul, status, tanggal pinjam, tanggal kembali) + PAGINATION
     // =====================================================
 
     public function tampil_data_peminjaman_cari_page($keyword, $start, $limit)
     {
-        $param_keyword = "%$keyword%";
+        $kw  = "%$keyword%";
+        $tgl = $this->normalisasi_keyword_tanggal($keyword);
         $start = (int) $start;
         $limit = (int) $limit;
 
@@ -200,6 +239,9 @@ class m_peminjaman
                 WHERE users.username LIKE ?
                    OR buku.judul LIKE ?
                    OR peminjaman.status LIKE ?
+                   OR " . $this->label_status_peminjaman_sql() . " LIKE ?
+                   OR " . $this->kondisi_tanggal('peminjaman.tanggal_pinjam') . "
+                   OR " . $this->kondisi_tanggal('peminjaman.tanggal_kembali') . "
                 ORDER BY
                     FIELD(peminjaman.status, 'pengajuan', 'disetujui', 'dipinjam', 'dikembalikan', 'ditolak'),
                     peminjaman.id_peminjaman DESC
@@ -211,14 +253,7 @@ class m_peminjaman
             return [];
         }
 
-        $stmt->bind_param(
-            "sssii",
-            $param_keyword,
-            $param_keyword,
-            $param_keyword,
-            $start,
-            $limit
-        );
+        $stmt->bind_param("ssssssssii", $kw, $kw, $kw, $kw, $tgl, $tgl, $tgl, $tgl, $start, $limit);
 
         $stmt->execute();
 
@@ -242,7 +277,8 @@ class m_peminjaman
 
     public function hitung_total_peminjaman_cari($keyword)
     {
-        $param_keyword = "%$keyword%";
+        $kw  = "%$keyword%";
+        $tgl = $this->normalisasi_keyword_tanggal($keyword);
 
         $sql = "SELECT COUNT(*) AS total
                 FROM peminjaman
@@ -250,7 +286,10 @@ class m_peminjaman
                 LEFT JOIN buku  ON peminjaman.id_buku = buku.id_buku
                 WHERE users.username LIKE ?
                    OR buku.judul LIKE ?
-                   OR peminjaman.status LIKE ?";
+                   OR peminjaman.status LIKE ?
+                   OR " . $this->label_status_peminjaman_sql() . " LIKE ?
+                   OR " . $this->kondisi_tanggal('peminjaman.tanggal_pinjam') . "
+                   OR " . $this->kondisi_tanggal('peminjaman.tanggal_kembali');
 
         $stmt = $this->conn->prepare($sql);
 
@@ -258,12 +297,7 @@ class m_peminjaman
             return 0;
         }
 
-        $stmt->bind_param(
-            "sss",
-            $param_keyword,
-            $param_keyword,
-            $param_keyword
-        );
+        $stmt->bind_param("ssssssss", $kw, $kw, $kw, $kw, $tgl, $tgl, $tgl, $tgl);
 
         $stmt->execute();
 
@@ -593,12 +627,13 @@ class m_peminjaman
 
 
     // =====================================================
-    // (ADMIN) PENCARIAN DATA PENGEMBALIAN (username, judul) + PAGINATION
+    // (ADMIN) PENCARIAN DATA PENGEMBALIAN (username, judul, tanggal pinjam, tenggat, tanggal dikembalikan) + PAGINATION
     // =====================================================
 
     public function tampil_data_pengembalian_cari_page($keyword, $start, $limit)
     {
-        $param_keyword = "%$keyword%";
+        $kw  = "%$keyword%";
+        $tgl = $this->normalisasi_keyword_tanggal($keyword);
         $start = (int) $start;
         $limit = (int) $limit;
 
@@ -616,7 +651,13 @@ class m_peminjaman
                 LEFT JOIN buku  ON peminjaman.id_buku = buku.id_buku
                 LEFT JOIN pengembalian ON pengembalian.id_peminjaman = peminjaman.id_peminjaman
                 WHERE peminjaman.status IN ('dipinjam', 'dikembalikan')
-                  AND (users.username LIKE ? OR buku.judul LIKE ?)
+                  AND (users.username LIKE ?
+                       OR buku.judul LIKE ?
+                       OR peminjaman.status LIKE ?
+                       OR " . $this->label_status_pengembalian_sql() . " LIKE ?
+                       OR " . $this->kondisi_tanggal('peminjaman.tanggal_pinjam') . "
+                       OR " . $this->kondisi_tanggal('peminjaman.tanggal_kembali') . "
+                       OR (peminjaman.status = 'dikembalikan' AND " . $this->kondisi_tanggal('pengembalian.tanggal_pengembalian') . "))
                 ORDER BY
                     FIELD(peminjaman.status, 'dipinjam', 'dikembalikan'),
                     (pengembalian.id_pengembalian IS NULL) DESC,
@@ -629,13 +670,7 @@ class m_peminjaman
             return [];
         }
 
-        $stmt->bind_param(
-            "ssii",
-            $param_keyword,
-            $param_keyword,
-            $start,
-            $limit
-        );
+        $stmt->bind_param("ssssssssssii", $kw, $kw, $kw, $kw, $tgl, $tgl, $tgl, $tgl, $tgl, $tgl, $start, $limit);
 
         $stmt->execute();
 
@@ -659,14 +694,22 @@ class m_peminjaman
 
     public function hitung_total_pengembalian_cari($keyword)
     {
-        $param_keyword = "%$keyword%";
+        $kw  = "%$keyword%";
+        $tgl = $this->normalisasi_keyword_tanggal($keyword);
 
         $sql = "SELECT COUNT(*) AS total
                 FROM peminjaman
                 LEFT JOIN users ON peminjaman.id_user = users.id_user
                 LEFT JOIN buku  ON peminjaman.id_buku = buku.id_buku
+                LEFT JOIN pengembalian ON pengembalian.id_peminjaman = peminjaman.id_peminjaman
                 WHERE peminjaman.status IN ('dipinjam', 'dikembalikan')
-                  AND (users.username LIKE ? OR buku.judul LIKE ?)";
+                  AND (users.username LIKE ?
+                       OR buku.judul LIKE ?
+                       OR peminjaman.status LIKE ?
+                       OR " . $this->label_status_pengembalian_sql() . " LIKE ?
+                       OR " . $this->kondisi_tanggal('peminjaman.tanggal_pinjam') . "
+                       OR " . $this->kondisi_tanggal('peminjaman.tanggal_kembali') . "
+                       OR (peminjaman.status = 'dikembalikan' AND " . $this->kondisi_tanggal('pengembalian.tanggal_pengembalian') . "))";
 
         $stmt = $this->conn->prepare($sql);
 
@@ -674,7 +717,7 @@ class m_peminjaman
             return 0;
         }
 
-        $stmt->bind_param("ss", $param_keyword, $param_keyword);
+        $stmt->bind_param("ssssssssss", $kw, $kw, $kw, $kw, $tgl, $tgl, $tgl, $tgl, $tgl, $tgl);
 
         $stmt->execute();
 
@@ -810,59 +853,5 @@ class m_peminjaman
         return (int) ($data['total'] ?? 0);
     }
 
-
-    // =====================================================
-    // (ADMIN/DASHBOARD) HITUNG: TOTAL SUDAH DIKEMBALIKAN
-    // =====================================================
-
-    public function hitung_total_dikembalikan()
-    {
-        $sql = "SELECT COUNT(*) AS total
-                FROM peminjaman
-                WHERE status = 'dikembalikan'";
-
-        $query = mysqli_query($this->conn, $sql);
-        $data  = mysqli_fetch_assoc($query);
-
-        return (int) ($data['total'] ?? 0);
-    }
-
-
-    // =====================================================
-    // (ADMIN/DASHBOARD) DAFTAR RINGKAS YANG MENUNGGU KONFIRMASI
-    // Dipakai untuk widget di halaman dashboard_admin.php
-    // =====================================================
-
-    public function riwayat_menunggu_konfirmasi($limit = 5)
-    {
-        $limit = (int) $limit;
-
-        $sql = "SELECT
-                    peminjaman.id_peminjaman,
-                    peminjaman.tanggal_pinjam,
-                    peminjaman.tanggal_kembali,
-                    users.username,
-                    buku.judul,
-                    buku.link_gambar,
-                    pengembalian.tanggal_pengembalian
-                FROM peminjaman
-                INNER JOIN pengembalian
-                    ON pengembalian.id_peminjaman = peminjaman.id_peminjaman
-                LEFT JOIN users ON peminjaman.id_user = users.id_user
-                LEFT JOIN buku  ON peminjaman.id_buku = buku.id_buku
-                WHERE peminjaman.status = 'dipinjam'
-                ORDER BY pengembalian.tanggal_pengembalian ASC
-                LIMIT $limit";
-
-        $query = mysqli_query($this->conn, $sql);
-
-        $result = [];
-
-        while ($data = mysqli_fetch_object($query)) {
-            $result[] = $data;
-        }
-
-        return $result;
-    }
 }
 ?>

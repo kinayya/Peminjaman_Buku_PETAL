@@ -31,6 +31,7 @@ $kw_param = !empty($keyword)
         rel="stylesheet"
         href="../css/daftar_kategori.css"
     >
+    <link rel="stylesheet" href="../css/admin_responsive.css">
 
 
     <!-- FONT AWESOME -->

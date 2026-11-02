@@ -1,5 +1,8 @@
 <?php
 
+include_once __DIR__ . '/auth.php';
+auth_wajib_admin();
+
 include_once __DIR__ . '/../models/m_user.php';
 
 $user = new m_user();

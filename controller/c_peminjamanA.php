@@ -1,25 +1,12 @@
 <?php
 
-session_start();
+include_once __DIR__ . '/auth.php';
+auth_wajib_admin();
 
 include_once __DIR__ . '/../models/m_peminjaman.php';
 
 $peminjaman = new m_peminjaman();
 
-// =====================================================
-// PROTEKSI HALAMAN: HANYA ADMIN
-// =====================================================
-if (
-    !isset($_SESSION['data']) ||
-    !isset($_SESSION['data']['role']) ||
-    $_SESSION['data']['role'] !== 'admin'
-) {
-    echo "<script>
-            alert('Silakan login sebagai admin terlebih dahulu.');
-            window.location='../index.php';
-          </script>";
-    exit;
-}
 
 try {
 

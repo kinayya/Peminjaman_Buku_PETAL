@@ -4,31 +4,12 @@
 // CONTROLLER HALAMAN PROFIL USER
 // =====================================================
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-// Supaya tombol "Back" setelah logout tidak menampilkan halaman dari cache
-header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
-header('Pragma: no-cache');
+include_once __DIR__ . '/auth.php';
+auth_wajib_user();
 
 include_once __DIR__ . '/../models/m_profil.php';
 
 
-// =====================================================
-// PROTEKSI HALAMAN: HARUS LOGIN
-// =====================================================
-
-if (
-    !isset($_SESSION['data']) ||
-    !isset($_SESSION['data']['id_user'])
-) {
-    echo "<script>
-            alert('Silakan login terlebih dahulu.');
-            window.location='../index.php';
-          </script>";
-    exit;
-}
 
 $id_user = (int) $_SESSION['data']['id_user'];
 

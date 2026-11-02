@@ -16,13 +16,9 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
         content="width=device-width, initial-scale=1.0">
 
     <title>Katalog Buku - Progresif Library</title>
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Original+Surfer&display=swap');
@@ -708,6 +704,43 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
         }
 
         /* =====================================================
+           SINOPSIS BUKU
+        ===================================================== */
+
+        .pinjam-sinopsis {
+            margin-bottom: 20px;
+        }
+
+        .pinjam-sinopsis-label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .pinjam-sinopsis-text {
+            max-height: 130px;
+            overflow-y: auto;
+            padding: 10px 12px;
+            border: 1px solid #D8E3E6;
+            border-radius: 10px;
+            background: #fafcfd;
+            font-size: 0.8rem;
+            line-height: 1.55;
+            color: #555;
+            text-align: justify;
+            white-space: pre-line;
+        }
+
+        .pinjam-sinopsis-text.kosong {
+            font-style: italic;
+            color: #999;
+            text-align: left;
+        }
+
+
+        /* =====================================================
            FORM
         ===================================================== */
 
@@ -1002,6 +1035,39 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
                 width: 100%;
             }
 
+
+            /* Pencarian + filter kategori: filter turun ke baris bawah */
+
+            .search-form {
+                width: 100%;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .search-form .search-box {
+                flex: 1 1 100%;
+            }
+
+            .filter-kategori {
+                flex: 1 1 100%;
+                max-width: none;
+            }
+
+
+            /* Pagination boleh turun baris kalau halamannya banyak */
+
+            .pagination-container {
+                flex-wrap: wrap;
+                margin-top: 25px;
+            }
+
+
+            /* Sinopsis di modal */
+
+            .pinjam-sinopsis-text {
+                max-height: 110px;
+            }
+
         }
 
 
@@ -1017,6 +1083,26 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
 
             .book-cover-wrapper {
                 height: 240px;
+            }
+
+            .modal-box {
+                padding: 20px 16px;
+            }
+
+            .modal-title {
+                font-size: 1.45rem;
+            }
+
+            .modal-close {
+                right: 12px;
+                top: 12px;
+                width: 34px;
+                height: 34px;
+            }
+
+            .pinjam-book-preview img {
+                width: 42px;
+                height: 58px;
             }
 
         }
@@ -1253,6 +1339,12 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
                                     'UTF-8'
                                 ); ?>"
 
+                                data-sinopsis="<?= htmlspecialchars(
+                                    $buku_item->sinopsis ?? '',
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ); ?>"
+
                                 data-stok="<?= $stok; ?>"
 
                                 onclick="bukaModalPinjam(this)"
@@ -1435,6 +1527,20 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
             </div>
 
 
+            <!-- SINOPSIS -->
+
+            <div class="pinjam-sinopsis">
+
+                <span class="pinjam-sinopsis-label">Sinopsis</span>
+
+                <div
+                    id="pinjam_sinopsis"
+                    class="pinjam-sinopsis-text"
+                ></div>
+
+            </div>
+
+
             <!-- FORM -->
 
             <form
@@ -1573,6 +1679,9 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
             const stok =
                 btn.dataset.stok || '0';
 
+            const sinopsis =
+                (btn.dataset.sinopsis || '').trim();
+
 
             /* ISI DATA MODAL */
 
@@ -1601,6 +1710,24 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
             document.getElementById(
                 'pinjam_cover'
             ).src = gambar;
+
+
+            const elSinopsis =
+                document.getElementById(
+                    'pinjam_sinopsis'
+                );
+
+            elSinopsis.textContent =
+                sinopsis !== ''
+                    ? sinopsis
+                    : 'Sinopsis belum tersedia.';
+
+            elSinopsis.classList.toggle(
+                'kosong',
+                sinopsis === ''
+            );
+
+            elSinopsis.scrollTop = 0;
 
 
             /* ================================================

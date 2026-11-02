@@ -1,5 +1,8 @@
 <?php
 
+include_once __DIR__ . '/auth.php';
+auth_wajib_admin();
+
 include_once __DIR__ . '/../models/m_bukuA.php';
 
 $buku = new buku();
@@ -151,62 +154,36 @@ try {
 
             exit;
         }
-
-        // =================================================
-        // AMBIL DATA UNTUK FORM EDIT
-        // =================================================
-        elseif ($aksi === 'edit_form') {
-
-            $id_buku = $_GET['id_buku'] ?? '';
-
-            if (empty($id_buku)) {
-                header("Location: ../views/daftar_bukuA.php");
-                exit;
-            }
-
-            $data_edit = $buku->tampil_satu_buku((int) $id_buku);
-            $data_kategori = $buku->tampil_kategori();
-
-            if (!$data_edit) {
-                echo "<script>
-                        alert('Data buku tidak ditemukan');
-                        window.location='../views/daftar_bukuA.php';
-                      </script>";
-                exit;
-            }
-        }
     }
 
     // =====================================================
     // PAGINATION & TAMPIL DATA (DENGAN PENCARIAN)
     // =====================================================
-    if (!isset($_GET['aksi']) || $_GET['aksi'] !== 'edit_form') {
 
-        $limit = 10;
-        $halaman = isset($_GET['halaman']) ? max(1, (int) $_GET['halaman']) : 1;
-        $start = ($halaman - 1) * $limit;
+    $limit = 10;
+    $halaman = isset($_GET['halaman']) ? max(1, (int) $_GET['halaman']) : 1;
+    $start = ($halaman - 1) * $limit;
 
-        // Tangkap kata kunci pencarian dari URL
-        $keyword = trim($_GET['keyword'] ?? '');
+    // Tangkap kata kunci pencarian dari URL
+    $keyword = trim($_GET['keyword'] ?? '');
 
-        // Tangkap filter kategori (0 = semua kategori)
-        $id_kategori = (int) ($_GET['kategori'] ?? 0);
+    // Tangkap filter kategori (0 = semua kategori)
+    $id_kategori = (int) ($_GET['kategori'] ?? 0);
 
-        // Catatan: pakai !== '' supaya kata kunci "0" (stok 0) tetap bisa dicari
-        if ($keyword !== '' || $id_kategori > 0) {
-            // Mengambil data terfilter jika kata kunci / kategori dipilih
-            $total_data = $buku->hitung_total_buku_cari($keyword, $id_kategori);
-            $total_halaman = ceil($total_data / $limit);
-            $data_buku = $buku->tampil_data_buku_cari_page($keyword, $start, $limit, $id_kategori);
-        } else {
-            // Mengambil seluruh data jika pencarian kosong
-            $total_data = $buku->hitung_total_buku();
-            $total_halaman = ceil($total_data / $limit);
-            $data_buku = $buku->tampil_data_buku_page($start, $limit);
-        }
-
-        $data_kategori = $buku->tampil_kategori();
+    // Catatan: pakai !== '' supaya kata kunci "0" (stok 0) tetap bisa dicari
+    if ($keyword !== '' || $id_kategori > 0) {
+        // Mengambil data terfilter jika kata kunci / kategori dipilih
+        $total_data = $buku->hitung_total_buku_cari($keyword, $id_kategori);
+        $total_halaman = ceil($total_data / $limit);
+        $data_buku = $buku->tampil_data_buku_cari_page($keyword, $start, $limit, $id_kategori);
+    } else {
+        // Mengambil seluruh data jika pencarian kosong
+        $total_data = $buku->hitung_total_buku();
+        $total_halaman = ceil($total_data / $limit);
+        $data_buku = $buku->tampil_data_buku_page($start, $limit);
     }
+
+    $data_kategori = $buku->tampil_kategori();
 
 } catch (Exception $e) {
 

@@ -11,30 +11,6 @@ class buku {
         $this->conn = $db->koneksi;
     }
 
-
-    // =====================================================
-    // TAMPIL SEMUA DATA BUKU
-    // =====================================================
-    public function tampil_data_buku() {
-
-        $sql = "SELECT buku.*, kategori.nama_kategori
-                FROM buku
-                LEFT JOIN kategori 
-                ON buku.id_kategori = kategori.id_kategori
-                ORDER BY buku.id_buku DESC";
-
-        $query = mysqli_query($this->conn, $sql);
-
-        $result = [];
-
-        while ($data = mysqli_fetch_object($query)) {
-            $result[] = $data;
-        }
-
-        return $result;
-    }
-
-
     // =====================================================
     // TAMPIL DATA KATEGORI
     // =====================================================
@@ -106,37 +82,6 @@ class buku {
 
         return $result;
     }
-
-
-    // =====================================================
-    // AMBIL SATU DATA BUKU BERDASARKAN ID
-    // =====================================================
-    public function tampil_satu_buku($id_buku) {
-
-        $sql = "SELECT buku.*, kategori.nama_kategori
-                FROM buku
-                LEFT JOIN kategori
-                ON buku.id_kategori = kategori.id_kategori
-                WHERE buku.id_buku = ?";
-
-        $stmt = $this->conn->prepare($sql);
-
-        if (!$stmt) {
-            return null;
-        }
-
-        $stmt->bind_param("i", $id_buku);
-        $stmt->execute();
-
-        $result = $stmt->get_result();
-
-        $data = $result->fetch_object();
-
-        $stmt->close();
-
-        return $data;
-    }
-
 
     // =====================================================
     // EDIT DATA BUKU

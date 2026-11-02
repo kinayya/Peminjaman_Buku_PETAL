@@ -1,21 +1,6 @@
 <?php
-session_start();
-
-// Supaya tombol "Back" setelah logout tidak menampilkan dashboard dari cache
-header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
-header('Pragma: no-cache');
-
-// Proteksi halaman: hanya pengguna yang sudah login dan memiliki role pengguna
-if (
-    !isset($_SESSION['data']['id_user']) ||
-    !in_array(($_SESSION['data']['role'] ?? ''), ['siswa', 'staff', 'guru'], true)
-) {
-    echo "<script>
-            alert('Silakan login terlebih dahulu.');
-            window.location='../index.php';
-          </script>";
-    exit;
-}
+require_once __DIR__ . '/../controller/auth.php';
+auth_wajib_user();
 
 // Ambil daftar Most Popular berdasarkan transaksi peminjaman pada database.
 require_once __DIR__ . '/../models/m_dashboard.php';

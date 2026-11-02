@@ -1,26 +1,13 @@
 <?php
 
-session_start();
+include_once __DIR__ . '/auth.php';
+auth_wajib_user();
 
 include_once __DIR__ . '/../models/m_peminjaman.php';
 
 $peminjaman = new m_peminjaman();
 
 
-// =====================================================
-// PROTEKSI HALAMAN: HARUS LOGIN
-// =====================================================
-
-if (
-    !isset($_SESSION['data']) ||
-    !isset($_SESSION['data']['id_user'])
-) {
-    echo "<script>
-            alert('Silakan login terlebih dahulu.');
-            window.location='../index.php';
-          </script>";
-    exit;
-}
 
 $id_user = (int) $_SESSION['data']['id_user'];
 
@@ -67,13 +54,47 @@ if (isset($_GET['aksi']) && $_GET['aksi'] === 'ajukan_pengembalian') {
 $keyword       = trim($_GET['keyword'] ?? '');
 $semua_riwayat = $peminjaman->riwayat_peminjaman_user($id_user);
 
-if (!empty($keyword)) {
+if ($keyword !== '') {
 
-    $kw = mb_strtolower($keyword);
+    $kw     = mb_strtolower($keyword);
+    $kw_tgl = str_replace('/', '-', $kw);   // 29/10/2026 -> 29-10-2026
 
-    $riwayat = array_values(array_filter($semua_riwayat, function ($r) use ($kw) {
+    // Format tanggal yang bisa diketik: 2026-10-29 atau 29-10-2026
+    $format_tgl = function ($tgl) {
+        if (empty($tgl) || strtotime($tgl) === false) {
+            return '';
+        }
+        return $tgl . ' ' . date('d-m-Y', strtotime($tgl));
+    };
+
+    // Label status persis seperti yang tampil di tabel
+    $label_cari = [
+        'pengajuan'    => 'Menunggu Persetujuan',
+        'disetujui'    => 'Disetujui, Ambil di Perpustakaan',
+        'dipinjam'     => 'Sedang Dipinjam',
+        'dikembalikan' => 'Sudah Dikembalikan',
+        'ditolak'      => 'Ditolak',
+    ];
+
+    $riwayat = array_values(array_filter($semua_riwayat, function ($r) use ($kw, $kw_tgl, $format_tgl, $label_cari) {
+
+        $status_r    = $r->status ?? '';
+        $teks_status = mb_strtolower($status_r . ' ' . ($label_cari[$status_r] ?? ''));
+
+        if ($status_r === 'dipinjam' && !empty($r->id_pengembalian)) {
+            $teks_status .= ' menunggu konfirmasi admin';
+        }
+
+        $teks_tanggal = $format_tgl($r->tanggal_pinjam ?? '')
+            . ' ' . $format_tgl($r->tanggal_kembali ?? '');
+
+        if (($r->status ?? '') === 'dikembalikan') {
+            $teks_tanggal .= ' ' . $format_tgl($r->tanggal_pengembalian ?? '');
+        }
+
         return str_contains(mb_strtolower($r->judul ?? ''), $kw)
-            || str_contains(mb_strtolower($r->status ?? ''), $kw);
+            || str_contains($teks_status, $kw)
+            || str_contains($teks_tanggal, $kw_tgl);
     }));
 
 } else {

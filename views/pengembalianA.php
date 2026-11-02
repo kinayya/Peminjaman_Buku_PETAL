@@ -19,6 +19,7 @@ $kw_param = !empty($keyword) ? '&keyword=' . urlencode($keyword) : '';
     <!-- CSS -->
     <link rel="stylesheet" href="../css/peminjamanA.css">
     <link rel="stylesheet" href="../css/pengembalianA.css">
+    <link rel="stylesheet" href="../css/admin_responsive.css">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -60,7 +61,7 @@ $kw_param = !empty($keyword) ? '&keyword=' . urlencode($keyword) : '';
                 type="text"
                 name="keyword"
                 value="<?= htmlspecialchars($keyword, ENT_QUOTES, 'UTF-8'); ?>"
-                placeholder="Cari nama peminjam / judul buku..."
+                placeholder="Cari Pengembalian"
             >
         </form>
     </div>

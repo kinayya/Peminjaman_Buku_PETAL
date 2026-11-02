@@ -33,10 +33,11 @@ body {
     justify-content: space-between;
 
     background: linear-gradient(
-        90deg,
-        #fcfea4db,
-        #d9e8e8,
-        #b4dbf7
+        120deg,
+        #feffd6 0%,
+        #b4dbf7 35%,
+        #b4dbf7 40%,
+        #feffd6 100%
     );
 
     border-radius: 50px;
@@ -112,41 +113,6 @@ body {
     margin-bottom: 20px;
 
     gap: 15px;
-}
-
-
-/* =====================================================
-   FILTER TABS (STATUS)
-===================================================== */
-
-.status-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 22px;
-}
-
-
-.status-tabs a {
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #53646d;
-    background: #eef2f3;
-    transition: 0.2s ease;
-}
-
-
-.status-tabs a:hover {
-    background: #dfe7e9;
-}
-
-
-.status-tabs a.active {
-    background: #3e9db2;
-    color: white;
 }
 
 
@@ -488,99 +454,4 @@ body {
 .pagination a.active {
     background: #fef9cb;
     color: #2c4c81;
-}
-
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
-
-@media (max-width: 1000px) {
-
-    .navbar {
-        width: calc(100% - 30px);
-    }
-
-    .container {
-        width: calc(100% - 30px);
-    }
-
-}
-
-
-@media (max-width: 800px) {
-
-    .navbar {
-        width: calc(100% - 25px);
-
-        min-height: 70px;
-
-        height: auto;
-
-        border-radius: 25px;
-
-        padding: 10px 15px;
-
-        flex-direction: column;
-
-        gap: 10px;
-    }
-
-
-    .logo {
-        width: 80px;
-        height: 80px;
-
-        margin-top: 0;
-    }
-
-
-    .nav-links {
-        width: 100%;
-
-        overflow-x: auto;
-
-        justify-content: flex-start;
-
-        padding-bottom: 3px;
-    }
-
-
-    .nav-links a {
-        flex-shrink: 0;
-    }
-
-
-    .container {
-        width: calc(100% - 25px);
-
-        margin-top: 25px;
-    }
-
-
-    .page-header {
-        align-items: stretch;
-
-        gap: 12px;
-
-        flex-direction: column;
-    }
-
-
-    .search-box {
-        width: 100%;
-    }
-
-
-    .table-wrapper {
-        overflow-x: auto;
-
-        -webkit-overflow-scrolling: touch;
-    }
-
-
-    #tablePeminjaman {
-        min-width: 1050px;
-    }
-
 }

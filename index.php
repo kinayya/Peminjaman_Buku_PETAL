@@ -31,8 +31,8 @@
             background: linear-gradient(
                 180deg,
                 #b4dbf7 -10%,
-                #feffd6 40%,
-                #feffd6 65%,
+                #feffd6 35%,
+                #feffd6 60%,
                 #b4dbf7 130%
             );
 
@@ -198,6 +198,57 @@
             text-decoration: underline;
         }
 
+        /* =========================
+           RESPONSIVE
+           ========================= */
+
+        @media (max-width: 800px) {
+
+            body {
+                padding: 30px 5%;
+            }
+
+            .container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .left img {
+                max-height: 220px;
+            }
+
+            .right {
+                max-width: 420px;
+            }
+        }
+
+        @media (max-width: 400px) {
+
+            body {
+                padding: 20px 14px;
+            }
+
+            .left img {
+                max-height: 170px;
+            }
+
+            .quote {
+                font-size: 1.05rem;
+                margin-bottom: 18px;
+            }
+
+            .right input,
+            .right select,
+            .right button[type="submit"] {
+                padding: 13px 18px;
+                margin-bottom: 15px;
+                font-size: 0.95rem;
+            }
+
+            .toggle-password {
+                right: 38px;
+            }
+        }
     </style>
 
 </head>

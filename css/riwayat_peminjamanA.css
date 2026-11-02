@@ -25,22 +25,18 @@ body {
 .navbar {
     width: calc(100% - 50px);
     margin: 20px auto;
-
     padding: 8px 28px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     background: linear-gradient(
-        90deg,
-        #fcfea4db,
-        #d9e8e8,
-        #b4dbf7
+        120deg,
+        #feffd6 0%,
+        #b4dbf7 35%,
+        #b4dbf7 40%,
+        #feffd6 100%
     );
-
     border-radius: 50px;
-
     height: 70px;
 }
 
@@ -452,104 +448,6 @@ body {
     font-size: 12px;
     color: #52646c;
 }
-
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
-
-@media (max-width: 1000px) {
-
-    .navbar {
-        width: calc(100% - 30px);
-    }
-
-    .container {
-        width: calc(100% - 30px);
-    }
-
-}
-
-
-@media (max-width: 800px) {
-
-    .navbar {
-        width: calc(100% - 25px);
-
-        min-height: 70px;
-
-        height: auto;
-
-        border-radius: 25px;
-
-        padding: 10px 15px;
-
-        flex-direction: column;
-
-        gap: 10px;
-    }
-
-
-    .logo {
-        width: 80px;
-        height: 80px;
-
-        margin-top: 0;
-    }
-
-
-    .nav-links {
-        width: 100%;
-
-        overflow-x: auto;
-
-        justify-content: flex-start;
-
-        padding-bottom: 3px;
-    }
-
-
-    .nav-links a {
-        flex-shrink: 0;
-    }
-
-
-    .container {
-        width: calc(100% - 25px);
-
-        margin-top: 25px;
-    }
-
-
-    .page-header {
-        align-items: stretch;
-
-        gap: 12px;
-
-        flex-direction: column;
-    }
-
-
-    .search-box {
-        width: 100%;
-    }
-
-
-    .btn-cetak {
-        margin-left: 0;
-
-        width: 100%;
-
-        justify-content: center;
-    }
-
-
-    #tableRiwayat {
-        min-width: 900px;
-    }
-
-}
-
 
 /* =====================================================
    PRINT

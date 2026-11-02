@@ -1018,6 +1018,19 @@ $label_status = [
 
             }
 
+            .aksi {
+                min-width: 150px;
+            }
+
+            .pesan-admin {
+                max-width: 200px;
+            }
+
+            .empty-data {
+                padding: 40px 15px !important;
+            }
+
+
         }
 
 
@@ -1041,6 +1054,25 @@ $label_status = [
                 font-size: 1.75rem;
 
             }
+
+            .container {
+                padding: 0 10px 25px;
+            }
+
+            .search-section {
+                width: calc(100% - 20px);
+                margin: 10px;
+            }
+
+            table#tableRiwayat {
+                min-width: 760px;
+            }
+
+            #tableRiwayat th,
+            #tableRiwayat td {
+                padding: 10px 11px;
+            }
+
 
         }
 
@@ -1106,7 +1138,7 @@ $label_status = [
                     ENT_QUOTES,
                     'UTF-8'
                 ); ?>"
-                placeholder="Cari judul buku / status...">
+                placeholder="Cari Riwayat Transaksi">
 
         </form>
 
