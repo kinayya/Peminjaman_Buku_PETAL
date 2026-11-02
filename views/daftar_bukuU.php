@@ -267,7 +267,7 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
             display: grid;
 
             grid-template-columns:
-                repeat(4, 1fr);
+                repeat(4, minmax(0, 1fr));
 
             gap: 22px;
         }
@@ -904,7 +904,7 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
             }
 
             .book-cover-wrapper {
-                height: 220px;
+                height: 200px;
             }
 
         }
@@ -975,18 +975,24 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
 
 
             .book-cover-wrapper {
-                height: 190px;
+                height: 170px;
             }
 
 
             .book-details {
                 padding:
-                    12px 10px 0;
+                    10px 8px 0;
             }
 
 
             .book-title {
-                font-size: 1.2rem;
+                font-size: 0.85rem;
+            }
+
+
+            .book-card {
+                padding-bottom: 14px;
+                border-radius: 14px;
             }
 
 
@@ -1077,12 +1083,34 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
 
         @media (max-width: 400px) {
 
+            /* Tetap 2 card ke samping, ukuran dikecilkan */
             .catalog-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                gap: 10px;
             }
 
             .book-cover-wrapper {
-                height: 240px;
+                height: 150px;
+            }
+
+            .book-title {
+                font-size: 0.8rem;
+            }
+
+            .book-author {
+                font-size: 0.65rem;
+            }
+
+            .book-status {
+                font-size: 0.65rem;
+                margin-bottom: 8px;
+            }
+
+            .btn-pinjam {
+                padding: 5px 10px;
+                font-size: 0.64rem;
             }
 
             .modal-box {

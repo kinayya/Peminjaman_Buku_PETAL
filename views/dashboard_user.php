@@ -15,7 +15,7 @@ $buku_populer = $model_dashboard_user->buku_populer_user(5);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Progresif Library</title>
     <!-- Pastikan file CSS berada di folder yang sama atau sesuaikan jalurnya -->
-    <link rel="stylesheet" href="../css/dbuser.css">
+    <link rel="stylesheet" href="../css/dbuser.css?v=<?= filemtime(__DIR__ . '/../css/dbuser.css') ?>">
 </head>
 
 <body>

@@ -6,7 +6,7 @@
 // =====================================================
 
 include_once __DIR__ . '/auth.php';
-auth_wajib_user(true); // tamu boleh melihat katalog; admin dialihkan
+auth_wajib_user(); // wajib login sebagai user; tamu diarahkan ke login, admin dialihkan
 
 include_once __DIR__ . '/../models/m_bukuA.php';
 

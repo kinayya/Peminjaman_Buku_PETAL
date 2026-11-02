@@ -345,10 +345,6 @@
                         Siswa
                     </option>
 
-                    <option value="admin">
-                        Admin
-                    </option>
-
                     <option value="staff">
                         Staff
                     </option>

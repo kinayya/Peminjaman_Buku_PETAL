@@ -1,5 +1,5 @@
-<!-- proses pendaftaran pengguna baru -->
 <?php
+// proses pendaftaran pengguna baru
 include_once '../models/m_user.php';
 session_start();
 
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Whitelist role yang diperbolehkan, supaya tidak bisa dimanipulasi jadi nilai sembarang
-    $allowed_roles = ['admin', 'siswa', 'staff', 'guru'];
+    $allowed_roles = ['siswa', 'staff', 'guru'];
     if (!in_array($input_role, $allowed_roles, true)) {
         echo "<script>alert('Role tidak valid.'); window.location='../views/register.php'</script>";
         exit;

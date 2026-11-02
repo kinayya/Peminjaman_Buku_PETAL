@@ -1,5 +1,5 @@
-<!-- proses login pengguna -->
 <?php
+// proses login pengguna
 include_once '../models/m_user.php'; 
 session_start();
 
