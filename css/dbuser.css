@@ -546,7 +546,6 @@ body {
         overflow: visible;
     }
     .navbar-menu a {
-        position: relative;
         display: flex;
         flex: 0 0 34px;
         align-items: center;
