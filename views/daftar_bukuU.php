@@ -17,1125 +17,9 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
 
     <title>Katalog Buku - Progresif Library</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+    <link rel="stylesheet" href="../css/daftar_bukuU.css">
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Original+Surfer&display=swap');
-
-        :root {
-            --bg-cream: #FFF8EA;
-            --card-cream: #FDF0D5;
-            --primary-blue: #1D3557;
-            --accent-blue: #457B9D;
-            --soft-blue: #B4DBF7;
-            --border-blue: #D8E3E6;
-            --text-dark: #33475B;
-        }
-
-        /* =====================================================
-           RESET
-        ===================================================== */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-
-        /* =====================================================
-           BODY
-        ===================================================== */
-
-        body {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-
-        /* =====================================================
-           NAVBAR
-        ===================================================== */
-
-        .navbar {
-            width: calc(100% - 60px);
-            height: 60px;
-            margin: 12px 30px 0;
-            padding: 6px 22px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: linear-gradient(
-            90deg,
-            #feffd6 5%,     /* Kream di pinggir kiri */
-            #b4dbf7 50%,    /* Biru di titik tengah */
-            #feffd6 100%    /* Kream di pinggir kanan */
-             );
-            border-radius: 35px;
-            box-shadow:
-                0 3px 9px rgba(29, 53, 87, 0.07);
-        }
-
-
-        /* =====================================================
-           LOGO
-        ===================================================== */
-
-        .logo-link {
-            display: flex;
-            align-items: center;
-
-            text-decoration: none;
-
-            flex-shrink: 0;
-        }
-
-        .navbar .logo {
-            width: 85px;
-            height: auto;
-            display: block;
-            margin-top: 6px;
-        }
-
-
-        /* =====================================================
-           NAV LINKS
-        ===================================================== */
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav-links a {
-            font-family: "Original Surfer", sans-serif;
-            font-weight: 600;
-            font-style: normal;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 7px 13px;
-            color: #2c4c81;
-            text-decoration: none;
-            font-size: 0.95rem;
-            border-radius: 20px;
-            transition:
-                color 0.25s ease,
-                background-color 0.25s ease,
-                transform 0.25s ease;
-        }
-
-
-        /* =====================================================
-           GARIS AKTIF
-        ===================================================== */
-
-        .nav-links a::after {
-            content: "";
-            position: absolute;
-            bottom: 3px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background-color: #dfda4c;
-            border-radius: 10px;
-            transform: translateX(-50%);
-            transition: width 0.25s ease;
-        }
-
-
-        /* =====================================================
-           HOVER NAV
-        ===================================================== */
-
-        .nav-links a:hover {
-            background-color: #fef9cb;
-            transform: translateY(-1px);
-        }
-
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 28px;
-        }
-
-        .nav-links a.active {
-            background-color: #fef9cb;
-        }
-
-
-        /* =====================================================
-           SEARCH SECTION
-        ===================================================== */
-
-        .search-section {
-            width: calc(100% - 60px);
-            margin: 20px 30px 30px;
-            display: flex;
-            justify-content: flex-end;
-        }
-
-
-        /* =====================================================
-           SEARCH BOX
-        ===================================================== */
-
-        .search-box {
-            position: relative;
-            width: 250px;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 8px 13px 8px 35px;
-            border: 2px solid #6b96da;
-            border-radius: 20px;
-            outline: none;
-            font-size: 0.78rem;
-            transition: 0.2s;
-        }
-
-        .search-box input:focus {
-            border-color: #f5f263;
-            box-shadow:0 0 0 3px rgba(232, 229, 78, 0.26);
-        }
-
-        .search-box input::placeholder {
-            color: #718096;
-        }
-
-        .search-box i {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #456cae;
-            font-size: 0.8rem;
-            pointer-events: none;
-        }
-
-        .search-form {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .filter-kategori {
-            padding: 8px 13px;
-            border: 2px solid #6b96da;
-            border-radius: 20px;
-            background: #fff;
-            color: #33475B;
-            font-size: 0.78rem;
-            outline: none;
-            cursor: pointer;
-            max-width: 190px;
-            transition: 0.2s;
-        }
-
-        .filter-kategori:focus {
-            border-color: #f5f263;
-            box-shadow: 0 0 0 3px rgba(232, 229, 78, 0.26);
-        }
-
-
-        /* =====================================================
-           MAIN CONTAINER
-        ===================================================== */
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-
-            margin: 0 auto;
-
-            padding: 0 25px 40px;
-
-            flex: 1;
-        }
-
-
-        /* =====================================================
-           CATALOG GRID
-        ===================================================== */
-
-        .catalog-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(4, minmax(0, 1fr));
-
-            gap: 22px;
-        }
-
-
-        /* =====================================================
-           BOOK CARD
-        ===================================================== */
-
-        .book-card {
-            background-color: #fef9cb;
-            border-radius: 18px;
-            padding: 0 0 18px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            overflow: hidden;
-            box-shadow:
-                0 3px 10px
-                rgba(29, 53, 87, 0.06);
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
-        }
-
-        .book-card:hover {
-            transform: translateY(-5px);
-            box-shadow:
-                0 10px 22px
-                rgba(29, 53, 87, 0.13);
-        }
-
-        /* =====================================================
-           BOOK COVER
-        ===================================================== */
-
-        .book-cover-wrapper {
-            width: 100%;
-            height: 240px;
-
-            background-color: #eee;
-
-            overflow: hidden;
-        }
-
-        .book-cover {
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-
-            display: block;
-
-            transition:
-                transform 0.3s ease;
-        }
-
-        .book-card:hover .book-cover {
-            transform: scale(1.03);
-        }
-
-
-        /* =====================================================
-           BOOK DETAILS
-        ===================================================== */
-
-        .book-details {
-            width: 100%;
-            padding: 14px 15px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-
-        /* =====================================================
-           BOOK TITLE
-        ===================================================== */
-
-        .book-title {
-            width: 100%;
-            font-size: 0.90rem;
-            color: #6b96da;
-            margin-bottom: 3px;
-            line-height: 1.1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-
-        /* =====================================================
-           BOOK AUTHOR
-        ===================================================== */
-
-        .book-author {
-            font-family: "Original Surfer", sans-serif;
-            font-weight: 600;
-            font-style: normal;
-            width: 100%;
-            font-size: 0.85rem;
-            color: #456cae;
-            margin-bottom: 7px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-
-        /* =====================================================
-           STATUS STOK
-        ===================================================== */
-
-        .book-status {
-            font-size: 0.90rem;
-            font-weight: 700;
-            color: #6b96da;
-            margin-bottom: 12px;
-        }
-
-        .book-status.habis {
-            color: #c1121f;
-        }
-
-
-        /* =====================================================
-           BUTTON PINJAM
-        ===================================================== */
-
-        .btn-pinjam {
-            background-color: white;
-            color: #2c4c81;
-            border: 1.5px solid #6b96da;
-            padding: 7px 18px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.76rem;
-            cursor: pointer;
-            transition:
-                all 0.2s ease;
-        }
-
-        .btn-pinjam:hover {
-            background-color: #b4dbf7;
-            color: #2c4c81;
-            transform: translateY(-1px);
-        }
-
-        .btn-pinjam:disabled {
-            opacity: 0.5;
-
-            cursor: not-allowed;
-
-            background-color: #eee;
-
-            border-color: #aaa;
-
-            color: #888;
-
-            transform: none;
-        }
-
-
-        /* =====================================================
-           NO DATA
-        ===================================================== */
-
-        .no-data {
-            grid-column: 1 / -1;
-
-            text-align: center;
-
-            padding: 50px 20px;
-
-            font-size: 0.9rem;
-
-            font-weight: 600;
-
-            color: var(--primary-blue);
-        }
-
-        .no-data i {
-            font-size: 35px;
-
-            margin-bottom: 10px;
-        }
-
-
-        /* =====================================================
-           PAGINATION
-        ===================================================== */
-
-        .pagination-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 7px;
-            margin-top: 35px;
-        }
-
-        .pagination-container a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 32px;
-            height: 32px;
-            padding: 5px 10px;
-            font-size: 0.8rem;
-            text-decoration: none;
-            font-weight: 600;
-            border-radius: 9px;
-            color: #6b96da;
-            border: 2px solid #6b96da;
-            transition: all 0.2s ease;
-        }
-
-        .pagination-container a:hover {
-            background-color: #fef9cb;
-            border-color: #6b96da;
-            color: #2c4c81;
-        }
-
-        .pagination-container a.active {
-            background-color: #fef9cb;
-            color: #2c4c81;
-        }
-
-
-        /* =====================================================
-           MODAL PEMINJAMAN
-        ===================================================== */
-
-        .modal-overlay {
-            display: none;
-
-            position: fixed;
-
-            inset: 0;
-
-            width: 100%;
-            height: 100%;
-
-            background:
-                rgba(29, 53, 87, 0.45);
-
-            backdrop-filter: blur(4px);
-
-            justify-content: center;
-            align-items: center;
-
-            padding: 20px;
-
-            z-index: 9999;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-
-        /* =====================================================
-           MODAL BOX
-        ===================================================== */
-
-        .modal-box {
-            position: relative;
-
-            width: 100%;
-            max-width: 440px;
-
-            max-height: 90vh;
-
-            overflow-y: auto;
-
-            background: #fff;
-
-            border-radius: 20px;
-
-            padding: 30px;
-
-            box-shadow:
-                0 25px 70px
-                rgba(0, 0, 0, 0.2);
-
-            animation:
-                modalMasuk 0.25s ease;
-        }
-
-
-        /* =====================================================
-           ANIMATION MODAL
-        ===================================================== */
-
-        @keyframes modalMasuk {
-
-            from {
-                opacity: 0;
-
-                transform:
-                    translateY(-30px)
-                    scale(0.96);
-            }
-
-            to {
-                opacity: 1;
-
-                transform:
-                    translateY(0)
-                    scale(1);
-            }
-
-        }
-
-
-        /* =====================================================
-           CLOSE MODAL
-        ===================================================== */
-
-        .modal-close {
-            position: absolute;
-
-            right: 18px;
-            top: 18px;
-
-            width: 38px;
-            height: 38px;
-
-            border: none;
-
-            border-radius: 50%;
-
-            background: #f0f4f5;
-
-            color: var(--primary-blue);
-
-            font-size: 24px;
-
-            cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-        .modal-close:hover {
-            background: #fef9cb;
-            color: black;
-
-            transform: rotate(90deg);
-        }
-
-
-        /* =====================================================
-           MODAL TITLE
-        ===================================================== */
-
-        .modal-title {
-            font-family: "Original Surfer", sans-serif;
-            font-weight: 600;
-            font-style: normal;
-
-            font-size: 1.5rem;
-
-            color: #6b96da;
-
-            text-align: center;
-
-            margin-bottom: 12px;
-        }
-
-        /* =====================================================
-           BOOK PREVIEW
-        ===================================================== */
-
-        .pinjam-book-preview {
-            display: flex;
-
-            gap: 12px;
-
-            align-items: center;
-
-            background: #fef9cb;
-
-            border-radius: 12px;
-
-            padding: 10px 12px;
-
-            margin-bottom: 20px;
-        }
-
-        .pinjam-book-preview img {
-            width: 48px;
-            height: 66px;
-
-            object-fit: cover;
-
-            border-radius: 6px;
-
-            background: #eee;
-
-            flex-shrink: 0;
-        }
-
-        .pinjam-book-preview .info {
-            min-width: 0;
-        }
-
-        .pinjam-book-preview .info strong {
-            display: block;
-
-            font-size: 0.92rem;
-
-            color: #6b96da;
-
-            white-space: nowrap;
-
-            overflow: hidden;
-
-            text-overflow: ellipsis;
-        }
-
-        .pinjam-book-preview .info span {
-            display: block;
-            font-size: 0.78rem;
-            color: #666;
-            margin-top: 2px;
-        }
-        #pinjam_pengarang {
-            display: block;
-            font-family: "Original Surfer", sans-serif;
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: #456cae;
-            margin-top: 2px;
-        }
-
-        /* =====================================================
-           SINOPSIS BUKU
-        ===================================================== */
-
-        .pinjam-sinopsis {
-            margin-bottom: 20px;
-        }
-
-        .pinjam-sinopsis-label {
-            display: block;
-            margin-bottom: 6px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: var(--primary-blue);
-        }
-
-        .pinjam-sinopsis-text {
-            max-height: 130px;
-            overflow-y: auto;
-            padding: 10px 12px;
-            border: 1px solid #D8E3E6;
-            border-radius: 10px;
-            background: #fafcfd;
-            font-size: 0.8rem;
-            line-height: 1.55;
-            color: #555;
-            text-align: justify;
-            white-space: pre-line;
-        }
-
-        .pinjam-sinopsis-text.kosong {
-            font-style: italic;
-            color: #999;
-            text-align: left;
-        }
-
-
-        /* =====================================================
-           FORM
-        ===================================================== */
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-
-            margin-bottom: 6px;
-
-            font-size: 0.82rem;
-
-            font-weight: 600;
-
-            color: var(--primary-blue);
-        }
-
-        .form-group input[type="date"] {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #6b96da;
-            border-radius: 10px;
-            outline: none;
-            font-family: inherit;
-            font-size: 0.85rem;
-            color: var(--primary-blue);
-            background: #fff;
-        }
-
-        .form-group input[type="date"]:focus {
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 3px #b4dbf7;
-        }
-
-        .form-hint {
-            font-size: 0.75rem;
-
-            color: #777;
-
-            margin-top: 4px;
-        }
-
-
-        /* =====================================================
-           MODAL ACTIONS
-        ===================================================== */
-
-        .modal-actions {
-            display: flex;
-
-            justify-content: flex-end;
-
-            gap: 10px;
-
-            margin-top: 22px;
-
-            padding-top: 18px;
-
-            border-top:
-                1px solid #edf1f2;
-        }
-
-        .btn-batal,
-        .btn-simpan {
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.82rem;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .btn-batal {
-            background: #f0f4f5;
-
-            color: #555;
-        }
-
-        .btn-batal:hover {
-            background: #fef9cb;
-            color: black;
-        }
-
-        .btn-simpan {
-            background: #feffd6;
-
-            color: black;
-        }
-
-        .btn-simpan:hover {
-            background: #fef9cb;
-            color: black;
-        }
-
-
-        /* =====================================================
-           TABLET
-        ===================================================== */
-
-        @media (max-width: 1000px) {
-
-            .catalog-grid {
-                grid-template-columns:
-                    repeat(3, 1fr);
-            }
-
-        }
-
-
-        /* =====================================================
-           TABLET KECIL
-        ===================================================== */
-
-        @media (max-width: 800px) {
-
-            .navbar {
-                width: calc(100% - 30px);
-
-                margin: 10px 15px 0;
-
-                min-height: 55px;
-                height: auto;
-
-                padding: 6px 15px;
-            }
-
-            .navbar .logo {
-                width: 65px;
-            }
-
-            .nav-links {
-                gap: 1px;
-            }
-
-            .nav-links a {
-                padding: 6px 9px;
-
-                font-size: 0.7rem;
-            }
-
-
-            .search-section {
-                width: calc(100% - 30px);
-
-                margin: 12px 15px 14px;
-            }
-
-            .search-box {
-                width: 250px;
-            }
-
-
-            .catalog-grid {
-                grid-template-columns:
-                    repeat(2, 1fr);
-
-                gap: 16px;
-            }
-
-            .book-cover-wrapper {
-                height: 200px;
-            }
-
-        }
-
-
-        /* =====================================================
-           HP
-        ===================================================== */
-
-        @media (max-width: 600px) {
-
-            .navbar {
-                width: calc(100% - 30px);
-
-                border-radius: 22px;
-
-                padding: 8px 12px;
-
-                flex-direction: column;
-
-                gap: 5px;
-            }
-
-            .navbar .logo {
-                width: 65px;
-            }
-
-            .nav-links {
-                width: 100%;
-
-                justify-content: center;
-
-                flex-wrap: wrap;
-
-                gap: 1px;
-            }
-
-            .nav-links a {
-                padding: 5px 8px;
-
-                font-size: 0.68rem;
-            }
-
-
-            .search-section {
-                width: calc(100% - 30px);
-
-                margin: 12px 15px;
-            }
-
-            .search-box {
-                width: 100%;
-            }
-
-
-            .container {
-                padding:
-                    0 15px 30px;
-            }
-
-
-            .catalog-grid {
-                grid-template-columns:
-                    repeat(2, 1fr);
-
-                gap: 12px;
-            }
-
-
-            .book-cover-wrapper {
-                height: 170px;
-            }
-
-
-            .book-details {
-                padding:
-                    10px 8px 0;
-            }
-
-
-            .book-title {
-                font-size: 0.85rem;
-            }
-
-
-            .book-card {
-                padding-bottom: 14px;
-                border-radius: 14px;
-            }
-
-
-            .book-author {
-                font-size: 0.7rem;
-            }
-
-
-            .book-status {
-                font-size: 0.7rem;
-            }
-
-
-            .btn-pinjam {
-                padding: 6px 12px;
-
-                font-size: 0.68rem;
-            }
-
-
-            .modal-overlay {
-                padding: 15px;
-            }
-
-
-            .modal-box {
-                padding:
-                    25px 20px;
-
-                border-radius: 18px;
-            }
-
-
-            .modal-title {
-                font-size: 1.7rem;
-            }
-
-
-            .modal-actions {
-                flex-direction: column-reverse;
-            }
-
-
-            .btn-batal,
-            .btn-simpan {
-                width: 100%;
-            }
-
-
-            /* Pencarian + filter kategori: filter turun ke baris bawah */
-
-            .search-form {
-                width: 100%;
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-
-            .search-form .search-box {
-                flex: 1 1 100%;
-            }
-
-            .filter-kategori {
-                flex: 1 1 100%;
-                max-width: none;
-            }
-
-
-            /* Pagination boleh turun baris kalau halamannya banyak */
-
-            .pagination-container {
-                flex-wrap: wrap;
-                margin-top: 25px;
-            }
-
-
-            /* Sinopsis di modal */
-
-            .pinjam-sinopsis-text {
-                max-height: 110px;
-            }
-
-        }
-
-
-        /* =====================================================
-           HP SANGAT KECIL
-        ===================================================== */
-
-        @media (max-width: 400px) {
-
-            /* Tetap 2 card ke samping, ukuran dikecilkan */
-            .catalog-grid {
-                grid-template-columns:
-                    repeat(2, minmax(0, 1fr));
-
-                gap: 10px;
-            }
-
-            .book-cover-wrapper {
-                height: 150px;
-            }
-
-            .book-title {
-                font-size: 0.8rem;
-            }
-
-            .book-author {
-                font-size: 0.65rem;
-            }
-
-            .book-status {
-                font-size: 0.65rem;
-                margin-bottom: 8px;
-            }
-
-            .btn-pinjam {
-                padding: 5px 10px;
-                font-size: 0.64rem;
-            }
-
-            .modal-box {
-                padding: 20px 16px;
-            }
-
-            .modal-title {
-                font-size: 1.45rem;
-            }
-
-            .modal-close {
-                right: 12px;
-                top: 12px;
-                width: 34px;
-                height: 34px;
-            }
-
-            .pinjam-book-preview img {
-                width: 42px;
-                height: 58px;
-            }
-
-        }
-
-    </style>
 
 </head>
 
@@ -1382,8 +266,7 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
                                     : ''; ?>
                                 >
 
-                                Pinjam Sekarang
-
+                                <span class="btn-pinjam-label">Pinjam Sekarang</span>
                             </button>
 
                         </div>
@@ -1496,7 +379,7 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
 
 
     <!-- =====================================================
-         MODAL PEMINJAMAN
+         MODAL PEMINJAMAN (satu buku, jumlah bisa lebih dari satu)
     ===================================================== -->
 
     <div
@@ -1508,7 +391,11 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
             'modalPinjam'
         )">
 
-        <div class="modal-box">
+        <div
+            class="modal-box"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modalPinjamJudul">
 
 
             <!-- CLOSE -->
@@ -1516,6 +403,7 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
             <button
                 type="button"
                 class="modal-close"
+                aria-label="Tutup"
 
                 onclick="tutupModal(
                     'modalPinjam'
@@ -1528,62 +416,93 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
 
             <!-- TITLE -->
 
-            <h2 class="modal-title">
+            <h2 class="modal-title" id="modalPinjamJudul">
                 Ajukan Peminjaman
             </h2>
-
-            <!-- BOOK PREVIEW -->
-
-            <div class="pinjam-book-preview">
-
-                <img
-                    id="pinjam_cover"
-                    src=""
-                    alt="Cover buku"
-                >
-
-                <div class="info">
-
-                    <strong id="pinjam_judul"></strong>
-
-                    <span id="pinjam_pengarang"></span>
-
-                    <span id="pinjam_stok"></span>
-
-                </div>
-
-            </div>
-
-
-            <!-- SINOPSIS -->
-
-            <div class="pinjam-sinopsis">
-
-                <span class="pinjam-sinopsis-label">Sinopsis</span>
-
-                <div
-                    id="pinjam_sinopsis"
-                    class="pinjam-sinopsis-text"
-                ></div>
-
-            </div>
 
 
             <!-- FORM -->
 
             <form
+                id="formPinjam"
                 action="../controller/c_peminjaman.php?aksi=tambah"
                 method="POST"
+                onsubmit="rapikanJumlah(true)"
             >
-
 
                 <!-- ID BUKU -->
 
-                <input
-                    type="hidden"
-                    name="id_buku"
-                    id="pinjam_id_buku"
-                >
+                <input type="hidden" name="id_buku" id="pinjamIdBuku">
+
+
+                <!-- BUKU YANG DIPINJAM (diisi lewat JavaScript) -->
+
+                <div class="pinjam-book">
+
+                    <img id="pinjamCover" src="" alt="">
+
+                    <div class="pinjam-book-info">
+                        <strong id="pinjamJudul"></strong>
+                        <span class="penulis" id="pinjamPenulis"></span>
+                        <span class="stok" id="pinjamStok"></span>
+                    </div>
+
+                </div>
+
+
+                <!-- SINOPSIS -->
+
+                <div class="pinjam-sinopsis">
+
+                    <span class="pinjam-sinopsis-label">Sinopsis</span>
+
+                    <div class="pinjam-sinopsis-text" id="pinjamSinopsis"></div>
+
+                </div>
+
+
+                <!-- JUMLAH EKSEMPLAR -->
+
+                <div class="form-group">
+
+                    <label for="pinjam_jumlah">
+                        Jumlah
+                    </label>
+
+                    <div class="jumlah-stepper">
+
+                        <button
+                            type="button"
+                            id="btnKurang"
+                            aria-label="Kurangi jumlah"
+                            onclick="ubahJumlah(-1)"
+                        >&minus;</button>
+
+                        <input
+                            type="number"
+                            name="jumlah"
+                            id="pinjam_jumlah"
+                            value="1"
+                            min="1"
+                            max="1"
+                            inputmode="numeric"
+                            required
+                            oninput="rapikanJumlah(false)"
+                            onblur="rapikanJumlah(true)"
+                        >
+
+                        <button
+                            type="button"
+                            id="btnTambah"
+                            aria-label="Tambah jumlah"
+                            onclick="ubahJumlah(1)"
+                        >+</button>
+
+                    </div>
+
+                    <p class="form-hint" id="pinjamHintJumlah"></p>
+
+                </div>
 
 
                 <!-- TANGGAL PINJAM -->
@@ -1607,8 +526,8 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
 
                     <p class="form-hint">
 
-                        Tanggal kembali otomatis dihitung
-                        7 hari setelah tanggal ini.
+                        Tanggal kembali otomatis dihitung 7 hari
+                        setelah tanggal ini.
 
                     </p>
 
@@ -1623,7 +542,6 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
                     <button
                         type="button"
                         class="btn-batal"
-
                         onclick="tutupModal(
                             'modalPinjam'
                         )"
@@ -1636,7 +554,8 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
 
                     <button
                         type="submit"
-                        class="btn-simpan">
+                        class="btn-simpan"
+                        id="btnPinjamSubmit">
 
                         Pinjam
 
@@ -1659,7 +578,7 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
 
 
         /* =====================================================
-           LOGIN STATUS
+           LOGIN STATUS & PENGATURAN
         ===================================================== */
 
         const isLoggedIn =
@@ -1668,9 +587,84 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
                 ? 'true'
                 : 'false'; ?>;
 
+        // Jumlah maksimal untuk buku yang sedang dibuka di modal
+        // (sama dengan stok yang tersedia)
+        let jumlahMaks = 1;
+
 
         /* =====================================================
-           BUKA MODAL PEMINJAMAN
+           JUMLAH EKSEMPLAR
+        ===================================================== */
+
+        function jumlahSekarang()
+        {
+
+            const nilai = parseInt(
+                document.getElementById('pinjam_jumlah').value,
+                10
+            );
+
+            return isNaN(nilai) ? 0 : nilai;
+
+        }
+
+        function perbaruiJumlah()
+        {
+
+            const jumlah = jumlahSekarang();
+
+            document.getElementById('btnKurang').disabled =
+                jumlah <= 1;
+
+            document.getElementById('btnTambah').disabled =
+                jumlah >= jumlahMaks;
+
+        }
+
+        // akhir = true: nilai kosong/tidak valid dikembalikan ke 1
+        function rapikanJumlah(akhir)
+        {
+
+            const input = document.getElementById('pinjam_jumlah');
+
+            let jumlah = jumlahSekarang();
+
+            if (jumlah > jumlahMaks)
+            {
+                jumlah = jumlahMaks;
+            }
+
+            if (jumlah < 1)
+            {
+                jumlah = akhir ? 1 : 0;
+            }
+
+            if (input.value !== '' || akhir)
+            {
+                input.value = jumlah > 0 ? jumlah : '';
+            }
+
+            perbaruiJumlah();
+
+        }
+
+        function ubahJumlah(selisih)
+        {
+
+            const input = document.getElementById('pinjam_jumlah');
+
+            input.value = Math.min(
+                jumlahMaks,
+                Math.max(1, jumlahSekarang() + selisih)
+            );
+
+            perbaruiJumlah();
+
+        }
+
+
+        /* =====================================================
+           BUKA MODAL PEMINJAMAN (klik "Pinjam Sekarang")
         ===================================================== */
 
         function bukaModalPinjam(btn)
@@ -1687,103 +681,88 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
                     '../index.php';
 
                 return;
+
             }
+
+            const stok = parseInt(btn.dataset.stok, 10) || 0;
+
+            if (stok <= 0)
+            {
+                return;
+            }
+
+            jumlahMaks = stok;
 
 
             /* DATA BUKU */
 
-            const id =
+            const sinopsis = (btn.dataset.sinopsis || '').trim();
+
+            document.getElementById('pinjamIdBuku').value =
                 btn.dataset.id || '';
 
-            const judul =
+            const cover = document.getElementById('pinjamCover');
+            cover.src = btn.dataset.gambar || '';
+            cover.alt = 'Cover ' + (btn.dataset.judul || '');
+
+            document.getElementById('pinjamJudul').textContent =
                 btn.dataset.judul || '';
 
-            const pengarang =
-                btn.dataset.pengarang || '';
+            document.getElementById('pinjamPenulis').textContent =
+                'Oleh: ' + (btn.dataset.pengarang || '');
 
-            const gambar =
-                btn.dataset.gambar || '';
-
-            const stok =
-                btn.dataset.stok || '0';
-
-            const sinopsis =
-                (btn.dataset.sinopsis || '').trim();
-
-
-            /* ISI DATA MODAL */
-
-            document.getElementById(
-                'pinjam_id_buku'
-            ).value = id;
-
-
-            document.getElementById(
-                'pinjam_judul'
-            ).textContent = judul;
-
-
-            document.getElementById(
-                'pinjam_pengarang'
-            ).textContent =
-                'Oleh: ' + pengarang;
-
-
-            document.getElementById(
-                'pinjam_stok'
-            ).textContent =
+            document.getElementById('pinjamStok').textContent =
                 'Tersedia: ' + stok;
 
+            const teksSinopsis =
+                document.getElementById('pinjamSinopsis');
 
-            document.getElementById(
-                'pinjam_cover'
-            ).src = gambar;
+            teksSinopsis.textContent =
+                sinopsis !== '' ? sinopsis : 'Sinopsis belum tersedia.';
 
-
-            const elSinopsis =
-                document.getElementById(
-                    'pinjam_sinopsis'
-                );
-
-            elSinopsis.textContent =
-                sinopsis !== ''
-                    ? sinopsis
-                    : 'Sinopsis belum tersedia.';
-
-            elSinopsis.classList.toggle(
-                'kosong',
-                sinopsis === ''
-            );
-
-            elSinopsis.scrollTop = 0;
+            teksSinopsis.classList.toggle('kosong', sinopsis === '');
 
 
-            /* ================================================
-               TANGGAL HARI INI
-            ================================================= */
+            /* JUMLAH EKSEMPLAR */
+
+            const inputJumlah =
+                document.getElementById('pinjam_jumlah');
+
+            inputJumlah.max   = jumlahMaks;
+            inputJumlah.value = 1;
+
+            document.getElementById('pinjamHintJumlah').textContent =
+                'Maksimal ' + jumlahMaks + ' untuk buku ini.';
+
+            perbaruiJumlah();
+
+
+            /* TANGGAL HARI INI (waktu lokal perangkat) */
+
+            const sekarang = new Date();
 
             const today =
-                new Date()
+                new Date(
+                    sekarang.getTime()
+                    - sekarang.getTimezoneOffset() * 60000
+                )
                     .toISOString()
                     .split('T')[0];
 
 
-            const inputTanggal =
-                document.getElementById(
+            const inputTanggal = document.getElementById(
                     'pinjam_tanggal_pinjam'
                 );
-
 
             inputTanggal.min =
                 today;
 
-            inputTanggal.value =
-                today;
+            if (!inputTanggal.value || inputTanggal.value < today)
+            {
+                inputTanggal.value =
+                    today;
+            }
 
-
-            /* ================================================
-               TAMPILKAN MODAL
-            ================================================= */
 
             document
                 .getElementById('modalPinjam')
@@ -1861,6 +840,7 @@ include_once __DIR__ . '/../controller/c_bukuU.php';
 
             }
         );
+
 
     </script>
 

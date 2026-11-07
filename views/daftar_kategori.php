@@ -27,19 +27,13 @@ $kw_param = !empty($keyword)
 
     <!-- CSS -->
 
-    <link
-        rel="stylesheet"
-        href="../css/daftar_kategori.css"
-    >
+    <link rel="stylesheet" href="../css/daftar_kategori.css">
     <link rel="stylesheet" href="../css/admin_responsive.css">
 
 
     <!-- FONT AWESOME -->
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 </head>
 

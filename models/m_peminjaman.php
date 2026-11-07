@@ -13,15 +13,27 @@ class m_peminjaman
     }
 
     // =====================================================
-    // TAMBAH PEMINJAMAN
+    // TAMBAH PEMINJAMAN (SATU BUKU, SATU ATAU BEBERAPA EKSEMPLAR)
+    // Satu eksemplar = satu baris pada tabel peminjaman, jadi halaman
+    // admin, riwayat, dan pengembalian tetap bekerja seperti biasa.
+    // Semua baris disimpan dalam satu transaksi: kalau ada yang
+    // gagal, tidak ada satu pun yang tersimpan.
     // =====================================================
 
     public function tambah_peminjaman(
         $id_user,
         $id_buku,
+        $jumlah,
         $tanggal_pinjam,
         $tanggal_kembali
     ) {
+        $id_buku = (int) $id_buku;
+        $jumlah  = (int) $jumlah;
+
+        if ($id_buku <= 0 || $jumlah < 1) {
+            return false;
+        }
+
         $sql = "INSERT INTO peminjaman
                 (
                     id_user,
@@ -32,25 +44,67 @@ class m_peminjaman
                 )
                 VALUES (?, ?, ?, ?, 'pengajuan')";
 
+        $stmt = null;
+
+        try {
+            $this->conn->begin_transaction();
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->bind_param(
+                "iiss",
+                $id_user,
+                $id_buku,
+                $tanggal_pinjam,
+                $tanggal_kembali
+            );
+
+            for ($i = 0; $i < $jumlah; $i++) {
+                if (!$stmt->execute()) {
+                    throw new Exception('Gagal menyimpan peminjaman.');
+                }
+            }
+
+            $this->conn->commit();
+            $berhasil = true;
+        } catch (Throwable $e) {
+            $this->conn->rollback();
+            $berhasil = false;
+        }
+
+        if ($stmt) {
+            $stmt->close();
+        }
+
+        return $berhasil;
+    }
+
+
+    // =====================================================
+    // AMBIL JUDUL & STOK BUKU (untuk validasi + pesan error)
+    // =====================================================
+
+    public function info_buku($id_buku)
+    {
+        $sql = "SELECT judul, stok
+                FROM buku
+                WHERE id_buku = ?";
+
         $stmt = $this->conn->prepare($sql);
 
         if (!$stmt) {
-            return false;
+            return null;
         }
 
-        $stmt->bind_param(
-            "iiss",
-            $id_user,
-            $id_buku,
-            $tanggal_pinjam,
-            $tanggal_kembali
-        );
+        $stmt->bind_param("i", $id_buku);
 
-        $result = $stmt->execute();
+        $stmt->execute();
+
+        $data = $stmt->get_result()->fetch_assoc();
 
         $stmt->close();
 
-        return $result;
+        return $data ?: null;
     }
 
 

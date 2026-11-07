@@ -1,4 +1,4 @@
-  @import url('https://fonts.googleapis.com/css2?family=Original+Surfer&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Original+Surfer&display=swap');
 
 
         /* ROOT */
@@ -225,7 +225,7 @@
 
             position: relative;
 
-            width: 250px;
+            width: 300px;
 
         }
 
@@ -241,7 +241,7 @@
 
             outline: none;
 
-            font-size: 0.78rem;
+            font-size: 0.92rem;
 
             transition: 0.2s;
 
@@ -275,7 +275,7 @@
 
             color: #456cae;
 
-            font-size: 0.8rem;
+            font-size: 0.95rem;
 
             pointer-events: none;
 
@@ -316,7 +316,7 @@
 
         .page-subtitle {
 
-            font-size: 0.78rem;
+            font-size: 0.92rem;
 
             color: #718096;
 
@@ -367,7 +367,7 @@
 
             width: 100%;
 
-            min-width: 850px;
+            min-width: 950px;
 
             border-collapse: collapse;
 
@@ -390,7 +390,7 @@
 
             text-align: left;
 
-            font-size: 0.76rem;
+            font-size: 0.85rem;
 
             font-weight: 700;
 
@@ -408,15 +408,11 @@
         #tableRiwayat td {
             font-family: 'veranda', sans-serif;
             padding: 13px 18px;
-
             border-bottom:
                 1px solid
                 rgba(62, 157, 178, 0.12);
-
-            font-size: 0.76rem;
-
+            font-size: 0.8rem;
             vertical-align: middle;
-
             color: #555;
 
         }
@@ -433,7 +429,7 @@
 
             gap: 12px;
 
-            min-width: 240px;
+            min-width: 260px;
 
         }
 
@@ -484,8 +480,8 @@
 
         .judul-buku {
             display: block;
-            max-width: 230px;
-            font-size: 0.9rem;
+            max-width: 250px;
+            font-size: 1rem;
             font-weight: 700;
             color: #6b96da;
             white-space: nowrap;
@@ -500,9 +496,9 @@
             font-family: "Original Surfer", sans-serif;
             font-weight: 600;
             font-style: normal;
-            max-width: 230px;
+            max-width: 250px;
             margin-top: 3px;
-            font-size: 0.70rem;
+            font-size: 0.80rem;
             color: #456cae;
             white-space: nowrap;
             overflow: hidden;
@@ -523,7 +519,7 @@
 
             border-radius: 20px;
 
-            font-size: 0.68rem;
+            font-size: 0.8rem;
 
             font-weight: 700;
 
@@ -594,7 +590,7 @@
 
             display: block;
 
-            font-size: 0.65rem;
+            font-size: 0.78rem;
 
             color: #777;
 
@@ -609,7 +605,7 @@
 
         .aksi {
 
-            min-width: 180px;
+            min-width: 195px;
 
         }
 
@@ -628,7 +624,7 @@
 
             font-weight: 600;
 
-            font-size: 0.7rem;
+            font-size: 0.8rem;
 
             cursor: pointer;
 
@@ -655,7 +651,7 @@
 
             display: inline-block;
 
-            font-size: 0.68rem;
+            font-size: 0.82rem;
 
             color: #777;
 
@@ -680,7 +676,7 @@
 
             border-radius: 10px;
 
-            font-size: 0.68rem;
+            font-size: 0.82rem;
 
             line-height: 1.5;
 
@@ -688,7 +684,7 @@
 
             font-style: normal;
 
-            max-width: 240px;
+            max-width: 270px;
 
         }
 
@@ -699,7 +695,7 @@
 
             color: #1D3557;
 
-            font-size: 0.7rem;
+            font-size: 0.84rem;
 
         }
 
@@ -716,7 +712,7 @@
 
             color: var(--primary-blue) !important;
 
-            font-size: 0.85rem !important;
+            font-size: 1rem !important;
 
             font-weight: 600;
 
@@ -744,6 +740,41 @@
 
             text-decoration: underline;
 
+        }
+
+
+        /* =====================================================
+           PAGINATION
+        ===================================================== */
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+            margin-top: 25px;
+        }
+
+        .pagination a {
+            min-width: 36px;
+            height: 36px;
+            padding: 0 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border-radius: 9px;
+            color: #6b96da;
+            border: 2px solid #6b96da;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .pagination a:hover,
+        .pagination a.active {
+            background-color: #fef9cb;
+            color: #2c4c81;
         }
 
 
@@ -783,11 +814,8 @@
 
 
             .nav-links a {
-
-                padding: 6px 9px;
-
-                font-size: 0.7rem;
-
+                padding: 7px 10px;
+                font-size: 0.85rem;
             }
 
 
@@ -866,11 +894,8 @@
 
 
             .nav-links a {
-
-                padding: 5px 8px;
-
-                font-size: 0.68rem;
-
+                padding: 7px 11px;
+                font-size: 0.98rem;
             }
 
 
@@ -899,18 +924,17 @@
 
 
             .page-title {
-
-                font-size: 1.9rem;
-
+                font-size: 2.3rem;
             }
-
-
             .page-subtitle {
-
-                font-size: 0.7rem;
-
+                font-size: 1.05rem;
                 margin-bottom: 15px;
-
+            }
+            .search-box input {
+                font-size: 1.1rem;
+            }
+            .search-box i {
+                font-size: 1.05rem;
             }
 
 
@@ -921,65 +945,64 @@
             }
 
 
+            table#tableRiwayat {
+                min-width: 1000px;
+            }
             #tableRiwayat th {
-
-                padding: 12px 13px;
-
-                font-size: 0.68rem;
-
+                padding: 14px 14px;
+                font-size: 1rem;
             }
-
-
             #tableRiwayat td {
-
-                padding: 11px 13px;
-
-                font-size: 0.68rem;
-
+                padding: 13px 14px;
+                font-size: 1.05rem;
             }
-
-
+            .buku-cell {
+                min-width: 280px;
+            }
             .judul-buku {
-
-                font-size: 0.82rem;
-
+                max-width: 260px;
+                font-size: 1.15rem;
             }
-
-
             .pengarang-buku {
-
-                font-size: 0.62rem;
-
+                max-width: 260px;
+                font-size: 0.95rem;
             }
-
-
             .badge-status {
-
-                font-size: 0.62rem;
-
-                padding: 5px 9px;
-
+                font-size: 0.95rem;
+                padding: 6px 12px;
             }
-
-
+            .keterangan-kecil {
+                font-size: 0.92rem;
+            }
             .btn-kembalikan {
-
-                padding: 6px 11px;
-
-                font-size: 0.64rem;
-
+                padding: 9px 15px;
+                font-size: 0.98rem;
             }
-
             .aksi {
-                min-width: 150px;
+                min-width: 200px;
             }
-
+            .aksi-info {
+                font-size: 0.98rem;
+            }
             .pesan-admin {
-                max-width: 200px;
+                max-width: 250px;
+                font-size: 0.96rem;
             }
-
+            .pesan-admin strong {
+                font-size: 0.98rem;
+            }
             .empty-data {
                 padding: 40px 15px !important;
+                font-size: 1.1rem !important;
+            }
+            .pagination {
+                gap: 8px;
+                margin-top: 22px;
+            }
+            .pagination a {
+                min-width: 42px;
+                height: 42px;
+                font-size: 1.05rem;
             }
 
 
@@ -993,18 +1016,11 @@
         @media (max-width: 400px) {
 
             .nav-links a {
-
-                padding: 5px 6px;
-
-                font-size: 0.63rem;
-
+                padding: 6px 8px;
+                font-size: 0.92rem;
             }
-
-
             .page-title {
-
-                font-size: 1.75rem;
-
+                font-size: 2.1rem;
             }
 
             .container {
@@ -1016,9 +1032,7 @@
                 margin: 10px;
             }
 
-            table#tableRiwayat {
-                min-width: 760px;
-            }
+            
 
             #tableRiwayat th,
             #tableRiwayat td {

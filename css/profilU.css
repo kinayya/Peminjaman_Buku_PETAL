@@ -488,8 +488,8 @@ body {
     }
 
     .nav-links a {
-        padding: 7px 9px;
-        font-size: 11px;
+        padding: 7px 10px;
+        font-size: 13px;
     }
 }
 
@@ -528,7 +528,7 @@ body {
     }
 
     .nav-links a {
-        font-size: 10px;
+        font-size: 13px;
         white-space: nowrap;
     }
 
@@ -568,6 +568,22 @@ body {
         flex-direction: column;
         align-items: flex-start;
     }
+
+    /* Font lebih besar di layar kecil */
+    .identity h2 { font-size: 24px; }
+    .identity p { font-size: 15px; }
+    .profil-role { font-size: 13px; }
+    .profil-stats strong { font-size: 26px; }
+    .profil-stats span { font-size: 12px; }
+    .panel-title h2 { font-size: 20px; }
+    .panel-title p { font-size: 13px; }
+    .form-group label { font-size: 14px; }
+    .input-wrap > i { font-size: 15px; }
+    .input-wrap input { font-size: 16px; }
+    .btn-simpan { font-size: 15px; }
+    .alert { font-size: 14px; }
+    .logout-panel strong { font-size: 16px; }
+    .logout-panel a { font-size: 15px; }
 }
 
 /* =========================
@@ -587,7 +603,7 @@ body {
 
     .nav-links a {
         padding: 6px 8px;
-        font-size: 9.5px;
+        font-size: 12px;
     }
 
     .profil-content {
@@ -607,7 +623,7 @@ body {
     }
 
     .identity h2 {
-        font-size: 19px;
+        font-size: 22px;
     }
 
     .profil-stats {
@@ -619,7 +635,7 @@ body {
     }
 
     .profil-stats strong {
-        font-size: 21px;
+        font-size: 24px;
     }
 
     .profil-panel {
@@ -639,7 +655,7 @@ body {
     }
 
     .panel-title h2 {
-        font-size: 16px;
+        font-size: 18px;
     }
 
     .btn-simpan {

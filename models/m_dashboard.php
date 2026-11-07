@@ -209,6 +209,43 @@ class m_dashboard
 
 
     // =====================================================
+    // INFO LENGKAP SATU BUKU BERDASARKAN JUDUL
+    // (untuk popup pada kartu quote di dashboard user)
+    // =====================================================
+
+    public function detail_buku_by_judul($judul)
+    {
+        $sql = "SELECT buku.judul,
+                       buku.pengarang,
+                       buku.penerbit,
+                       buku.tahun_terbit,
+                       buku.stok,
+                       buku.sinopsis,
+                       buku.link_gambar,
+                       kategori.nama_kategori
+                FROM buku
+                LEFT JOIN kategori ON buku.id_kategori = kategori.id_kategori
+                WHERE buku.judul = ?
+                LIMIT 1";
+
+        $stmt = $this->conn->prepare($sql);
+
+        if (!$stmt) {
+            return null;
+        }
+
+        $stmt->bind_param("s", $judul);
+        $stmt->execute();
+
+        $data = $stmt->get_result()->fetch_assoc();
+
+        $stmt->close();
+
+        return $data ?: null;
+    }
+
+
+    // =====================================================
     // GRAFIK 4: JUMLAH JUDUL BUKU PER KATEGORI
     // =====================================================
 

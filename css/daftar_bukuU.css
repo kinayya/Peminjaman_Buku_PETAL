@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Original+Surfer&display=swap');
+
+        @import url('https://fonts.googleapis.com/css2?family=Original+Surfer&display=swap');
 
         :root {
             --bg-cream: #FFF8EA;
@@ -615,78 +616,8 @@
         }
 
         /* =====================================================
-           BOOK PREVIEW
-        ===================================================== */
-
-        .pinjam-book-preview {
-            display: flex;
-
-            gap: 12px;
-
-            align-items: center;
-
-            background: #fef9cb;
-
-            border-radius: 12px;
-
-            padding: 10px 12px;
-
-            margin-bottom: 20px;
-        }
-
-        .pinjam-book-preview img {
-            width: 48px;
-            height: 66px;
-
-            object-fit: cover;
-
-            border-radius: 6px;
-
-            background: #eee;
-
-            flex-shrink: 0;
-        }
-
-        .pinjam-book-preview .info {
-            min-width: 0;
-        }
-
-        .pinjam-book-preview .info strong {
-            display: block;
-
-            font-size: 0.92rem;
-
-            color: #6b96da;
-
-            white-space: nowrap;
-
-            overflow: hidden;
-
-            text-overflow: ellipsis;
-        }
-
-        .pinjam-book-preview .info span {
-            display: block;
-            font-size: 0.78rem;
-            color: #666;
-            margin-top: 2px;
-        }
-        #pinjam_pengarang {
-            display: block;
-            font-family: "Original Surfer", sans-serif;
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: #456cae;
-            margin-top: 2px;
-        }
-
-        /* =====================================================
            SINOPSIS BUKU
         ===================================================== */
-
-        .pinjam-sinopsis {
-            margin-bottom: 20px;
-        }
 
         .pinjam-sinopsis-label {
             display: block;
@@ -817,6 +748,114 @@
 
 
         /* =====================================================
+           PINJAM BUKU (satu judul, bisa lebih dari satu eksemplar)
+        ===================================================== */
+
+        .pinjam-book {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 16px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: #fef9cb;
+        }
+
+        .pinjam-book img {
+            width: 48px;
+            height: 66px;
+            object-fit: cover;
+            border-radius: 6px;
+            background: #eee;
+            flex-shrink: 0;
+        }
+
+        .pinjam-book-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .pinjam-book-info strong {
+            display: block;
+            font-size: 0.92rem;
+            color: #6b96da;
+            overflow-wrap: anywhere;
+        }
+
+        .pinjam-book-info .penulis {
+            display: block;
+            margin-top: 2px;
+            font-family: "Original Surfer", sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #456cae;
+        }
+
+        .pinjam-book-info .stok {
+            display: block;
+            margin-top: 2px;
+            font-size: 0.78rem;
+            color: #666;
+        }
+
+        .pinjam-sinopsis {
+            margin-bottom: 16px;
+        }
+
+        .jumlah-stepper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .jumlah-stepper button {
+            width: 38px;
+            height: 38px;
+            border: 1px solid #6b96da;
+            border-radius: 50%;
+            background: #fff;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .jumlah-stepper button:hover:not(:disabled) {
+            background: #b4dbf7;
+        }
+
+        .jumlah-stepper button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .form-group input[type="number"] {
+            width: 70px;
+            padding: 10px 6px;
+            border: 1px solid #6b96da;
+            border-radius: 10px;
+            outline: none;
+            text-align: center;
+            font-family: inherit;
+            font-size: 0.85rem;
+            color: var(--primary-blue);
+            background: #fff;
+            -moz-appearance: textfield;
+        }
+
+        .form-group input[type="number"]::-webkit-outer-spin-button,
+        .form-group input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .form-group input[type="number"]:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px #b4dbf7;
+        }
+
+        /* =====================================================
            TABLET
         ===================================================== */
 
@@ -856,9 +895,8 @@
             }
 
             .nav-links a {
-                padding: 6px 9px;
-
-                font-size: 0.7rem;
+                padding: 7px 10px;
+                font-size: 0.85rem;
             }
 
 
@@ -920,9 +958,8 @@
             }
 
             .nav-links a {
-                padding: 5px 8px;
-
-                font-size: 0.68rem;
+                padding: 6px 9px;
+                font-size: 0.85rem;
             }
 
 
@@ -963,7 +1000,7 @@
 
 
             .book-title {
-                font-size: 0.85rem;
+                font-size: 1rem;
             }
 
 
@@ -974,19 +1011,56 @@
 
 
             .book-author {
-                font-size: 0.7rem;
+                font-size: 0.85rem;
             }
-
-
             .book-status {
-                font-size: 0.7rem;
+                font-size: 0.85rem;
             }
-
-
             .btn-pinjam {
-                padding: 6px 12px;
-
-                font-size: 0.68rem;
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+            .search-box input,
+            .filter-kategori {
+                font-size: 1rem;
+            }
+            .search-box i {
+                font-size: 0.95rem;
+            }
+            .pagination-container a {
+                min-width: 38px;
+                height: 38px;
+                font-size: 0.95rem;
+            }
+            .no-data {
+                font-size: 1rem;
+            }
+            .pinjam-sinopsis-label,
+            .form-group label {
+                font-size: 0.92rem;
+            }
+            .pinjam-book-info strong {
+                font-size: 1rem;
+            }
+            .pinjam-book-info .penulis {
+                font-size: 0.92rem;
+            }
+            .pinjam-book-info .stok {
+                font-size: 0.88rem;
+            }
+            .pinjam-sinopsis-text {
+                font-size: 0.9rem;
+            }
+            .form-group input[type="date"],
+            .form-group input[type="number"] {
+                font-size: 1rem;
+            }
+            .form-hint {
+                font-size: 0.85rem;
+            }
+            .btn-batal,
+            .btn-simpan {
+                font-size: 0.95rem;
             }
 
 
@@ -1004,7 +1078,7 @@
 
 
             .modal-title {
-                font-size: 1.7rem;
+                font-size: 1.8rem;
             }
 
 
@@ -1072,22 +1146,23 @@
                 height: 150px;
             }
 
-            .book-title {
+            .nav-links a {
+                padding: 6px 7px;
                 font-size: 0.8rem;
             }
-
-            .book-author {
-                font-size: 0.65rem;
+            .book-title {
+                font-size: 0.95rem;
             }
-
+            .book-author {
+                font-size: 0.8rem;
+            }
             .book-status {
-                font-size: 0.65rem;
+                font-size: 0.8rem;
                 margin-bottom: 8px;
             }
-
             .btn-pinjam {
-                padding: 5px 10px;
-                font-size: 0.64rem;
+                padding: 7px 10px;
+                font-size: 0.8rem;
             }
 
             .modal-box {
@@ -1095,7 +1170,7 @@
             }
 
             .modal-title {
-                font-size: 1.45rem;
+                font-size: 1.6rem;
             }
 
             .modal-close {
@@ -1105,9 +1180,11 @@
                 height: 34px;
             }
 
-            .pinjam-book-preview img {
+            .pinjam-book img {
                 width: 42px;
                 height: 58px;
             }
 
         }
+
+    
